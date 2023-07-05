@@ -1,0 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    @apply font-montserrat text-white bg-black;
+}
+
+.text-primary {
+    @apply text-[#6BC0C6];
+}
+.bg-primary {
+    @apply bg-[#6BC0C6];
+}
