@@ -1,9 +1,8 @@
 import Content from "./Layouts/Content";
 
-export default function Dashboard() {
-    
+export default function Dashboard(props) {
     return (
-        <Content>
+        <Content user={props.auth.user}>
             <div>Ini Dashboard</div>
         </Content>
     );

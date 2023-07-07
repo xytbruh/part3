@@ -1,10 +1,9 @@
-import React from "react";
-import Content from "./Layouts/Content";
+import React from 'react'
+import Content from './Layouts/Content'
 
-export default function Pengaturan() {
-    return (
-        <Content>
-            <div className="border-b border-b-gray-200">
+export default function MenuMaster() {
+  return (
+<Content><div className="border-b border-b-gray-200">
                 <ul className="-mb-px flex items-center gap-4 text-sm font-medium">
                     <li className="flex-1">
                         <a
@@ -44,7 +43,6 @@ export default function Pengaturan() {
                     </li>
                    
                 </ul>
-            </div>
-        </Content>
-    );
+            </div></Content>
+    )
 }

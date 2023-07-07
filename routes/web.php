@@ -32,6 +32,10 @@ Route::get('dashboard', function () {
     return Inertia::render('pageAdmin/Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 // menu master
+
+Route::get('admin/menu-master', function () {
+    return Inertia::render('pageAdmin/MenuMaster');
+})->middleware(['verified'])->name('menu.master');
 Route::get('admin/menu-user', function () {
     return Inertia::render('pageAdmin/menuMaster/User');
 })->middleware(['verified'])->name('menu.user');
@@ -43,6 +47,9 @@ Route::get('admin/menu-fitur', function () {
 })->middleware(['verified'])->name('menu.fitur');
 
 // menu profil
+Route::get('admin/menu-profil', function () {
+    return Inertia::render('pageAdmin/MenuProfil');
+})->middleware(['verified'])->name('menu.profil');
 Route::get('admin/alamat', function () {
     return Inertia::render('pageAdmin/menuProfil/Alamat');
 })->middleware(['verified'])->name('alamat');
@@ -58,6 +65,9 @@ Route::get('admin/sosial-media', function () {
 
 
 //  menu layanan
+Route::get('admin/menu-layanan', function () {
+    return Inertia::render('pageAdmin/MenuLayanan');
+})->middleware(['verified'])->name('menu.layanan');
 Route::get('admin/layanan-free', function () {
     return Inertia::render('pageAdmin/menuLayanan/LayananFree');
 })->middleware(['verified'])->name('layanan.free');
@@ -73,6 +83,10 @@ Route::get('admin/layanan-tambah', function () {
 
 
 // menu market place
+
+Route::get('admin/menu-marketplace', function () {
+    return Inertia::render('pageAdmin/MenuMarketPlace');
+})->middleware(['verified'])->name('menu.marketplace');
 
 Route::middleware('verified')->group(function () {
     Route::get('kategori', [CategoryController::class, 'index']);
@@ -93,6 +107,9 @@ Route::get('admin/transaksi', function () {
 })->middleware(['verified'])->name('transaksi');
 
 // menu ijin
+Route::get('admin/menu-ijin', function () {
+    return Inertia::render('pageAdmin/MenuIjin');
+})->middleware(['verified'])->name('menu.ijin');
 Route::get('admin/pergantian-lokasi-penyedia', function () {
     return Inertia::render('pageAdmin/menuIjin/PergantianLokasiPenyedia');
 })->middleware(['verified'])->name('pergantian.lokasi.penyedia');
@@ -125,6 +142,12 @@ Route::get('admin/dompet', function () {
 Route::get('admin/laporan', function () {
     return Inertia::render('pageAdmin/Laporan');
 })->middleware(['verified'])->name('laporan');
+Route::get('/contoh', function () {
+    return Inertia::render('Contoh');
+})->name('contoh');
+Route::get('/contoh2', function () {
+    return Inertia::render('Contoh2');
+})->name('contoh2');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

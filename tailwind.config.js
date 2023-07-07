@@ -7,6 +7,7 @@ module.exports = {
         "./storage/framework/views/*.php",
         "./resources/views/**/*.blade.php",
         "./resources/js/**/*.jsx",
+
     ],
 
     theme: {
@@ -18,5 +19,8 @@ module.exports = {
         },
     },
 
-    plugins: [require("@tailwindcss/forms"), require("daisyui")],
+    plugins: [
+        require("@tailwindcss/forms"),
+        require("daisyui"),
+    ],
 };
