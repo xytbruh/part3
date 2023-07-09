@@ -84,17 +84,14 @@ Route::get('admin/layanan-tambah', function () {
 
 // menu market place
 
-Route::get('admin/menu-marketplace', function () {
-    return Inertia::render('pageAdmin/MenuMarketPlace');
-})->middleware(['verified'])->name('menu.marketplace');
 
 Route::middleware('verified')->group(function () {
     Route::get('kategori', [CategoryController::class, 'index']);
-    Route::post('admin/kategori', [CategoryController::class, 'store'] )->name('create.kategori');
-    Route::get('admin/kategori', [CategoryController::class, 'show'] )->name('my.kategori');
-    Route::get('admin/kategori/edit', [CategoryController::class, 'edit'] )->name('edit.kategori');
-    Route::post('admin/kategori/update', [CategoryController::class, 'update'] )->name('update.kategori');
-    Route::post('admin/kategori/delete', [CategoryController::class, 'destroy'] )->name('delete.kategori');
+    Route::post('admin/menu-marketplace', [CategoryController::class, 'store'] );
+    Route::get('admin/menu-marketplace', [CategoryController::class, 'show'] )->name('menu.marketplace');
+    Route::get('admin/menu-marketplace/edit', [CategoryController::class, 'edit'] )->name('edit.kategori');
+    Route::put('admin/menu-marketplace/update', [CategoryController::class, 'update'] )->name('update.kategori');
+    Route::post('admin/menu-marketplace/delete', [CategoryController::class, 'destroy'] )->name('delete.kategori');
 
 });
 

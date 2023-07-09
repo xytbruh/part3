@@ -2,8 +2,16 @@ import Authenticated from "@/Layouts/AuthenticatedLayout";
 import { Link } from "@inertiajs/react";
 import React, { useState } from "react";
 import LogoPart from "@/img/LogoPartlivin.png";
+import {
+    FaCartArrowDown,
+    FaHome,
+    FaList,
+    FaRocket,
+    FaUser,
+    FaWrench,
+} from "react-icons/fa";
 
-export default function Content({ children, user }) {
+export default function Content(props) {
     const [show, setShow] = useState(false);
     const [profile, setProfile] = useState(false);
 
@@ -23,49 +31,10 @@ export default function Content({ children, user }) {
                                     className="pl-6 text-white text-sm leading-3 tracking-normal mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none  flex items-center"
                                 >
                                     <div className="w-6 h-6 md:w-8 md:h-8">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            className="icon icon-tabler icon-tabler-grid"
-                                            viewBox="0 0 24 24"
-                                            strokeWidth="1.5"
-                                            stroke="currentColor"
-                                            fill="none"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                        >
-                                            <path
-                                                stroke="none"
-                                                d="M0 0h24v24H0z"
-                                            />
-                                            <rect
-                                                x={4}
-                                                y={4}
-                                                width={6}
-                                                height={6}
-                                                rx={1}
-                                            />
-                                            <rect
-                                                x={14}
-                                                y={4}
-                                                width={6}
-                                                height={6}
-                                                rx={1}
-                                            />
-                                            <rect
-                                                x={4}
-                                                y={14}
-                                                width={6}
-                                                height={6}
-                                                rx={1}
-                                            />
-                                            <rect
-                                                x={14}
-                                                y={14}
-                                                width={6}
-                                                height={6}
-                                                rx={1}
-                                            />
-                                        </svg>
+                                        <FaHome
+                                            size="20"
+                                            className="mx-auto mt-1"
+                                        />
                                     </div>
                                     <span className="ml-2 ">Dashboard</span>
                                 </Link>
@@ -76,22 +45,10 @@ export default function Content({ children, user }) {
                                     className="pl-6 text-white text-sm leading-3 tracking-normal mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex items-center"
                                 >
                                     <div className="w-6 h-6 md:w-8 md:h-8">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            className="icon icon-tabler icon-tabler-puzzle"
-                                            viewBox="0 0 24 24"
-                                            strokeWidth="1.5"
-                                            stroke="currentColor"
-                                            fill="none"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                        >
-                                            <path
-                                                stroke="none"
-                                                d="M0 0h24v24H0z"
-                                            />
-                                            <path d="M4 7h3a1 1 0 0 0 1 -1v-1a2 2 0 0 1 4 0v1a1 1 0 0 0 1 1h3a1 1 0 0 1 1 1v3a1 1 0 0 0 1 1h1a2 2 0 0 1 0 4h-1a1 1 0 0 0 -1 1v3a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-1a2 2 0 0 0 -4 0v1a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1h1a2 2 0 0 0 0 -4h-1a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1" />
-                                        </svg>
+                                        <FaList
+                                            size="20"
+                                            className="mx-auto mt-1"
+                                        />
                                     </div>
                                     <span className="ml-2 ">Menu Master</span>
                                 </Link>
@@ -102,23 +59,10 @@ export default function Content({ children, user }) {
                                     className="flex items-center"
                                 >
                                     <div className="w-6 h-6 md:w-8 md:h-8">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            className="icon icon-tabler icon-tabler-compass"
-                                            viewBox="0 0 24 24"
-                                            strokeWidth="1.5"
-                                            stroke="currentColor"
-                                            fill="none"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                        >
-                                            <path
-                                                stroke="none"
-                                                d="M0 0h24v24H0z"
-                                            />
-                                            <polyline points="8 16 10 10 16 8 14 14 8 16" />
-                                            <circle cx={12} cy={12} r={9} />
-                                        </svg>
+                                        <FaUser
+                                            size="20"
+                                            className="mx-auto mt-1"
+                                        />
                                     </div>
                                     <span className="ml-2 ">Menu Profil</span>
                                 </Link>
@@ -129,29 +73,10 @@ export default function Content({ children, user }) {
                                     className="flex items-center"
                                 >
                                     <div className="w-6 h-6 md:w-8 md:h-8">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            className="icon icon-tabler icon-tabler-code"
-                                            viewBox="0 0 24 24"
-                                            strokeWidth="1.5"
-                                            stroke="currentColor"
-                                            fill="none"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                        >
-                                            <path
-                                                stroke="none"
-                                                d="M0 0h24v24H0z"
-                                            />
-                                            <polyline points="7 8 3 12 7 16" />
-                                            <polyline points="17 8 21 12 17 16" />
-                                            <line
-                                                x1={14}
-                                                y1={4}
-                                                x2={10}
-                                                y2={20}
-                                            />
-                                        </svg>
+                                        <FaRocket
+                                            size="20"
+                                            className="mx-auto mt-1"
+                                        />
                                     </div>
                                     <span className="ml-2 ">Menu Layanan</span>
                                 </Link>
@@ -162,33 +87,28 @@ export default function Content({ children, user }) {
                                     className="flex items-center"
                                 >
                                     <div className="w-6 h-6 md:w-8 md:h-8">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            className="icon icon-tabler icon-tabler-code"
-                                            viewBox="0 0 24 24"
-                                            strokeWidth="1.5"
-                                            stroke="currentColor"
-                                            fill="none"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                        >
-                                            <path
-                                                stroke="none"
-                                                d="M0 0h24v24H0z"
-                                            />
-                                            <polyline points="7 8 3 12 7 16" />
-                                            <polyline points="17 8 21 12 17 16" />
-                                            <line
-                                                x1={14}
-                                                y1={4}
-                                                x2={10}
-                                                y2={20}
-                                            />
-                                        </svg>
+                                        <FaCartArrowDown
+                                            size="20"
+                                            className="mx-auto mt-1"
+                                        />
                                     </div>
                                     <span className="ml-2 ">
                                         Menu Market Place
                                     </span>
+                                </Link>
+                            </li>
+                            <li className="pl-6 text-white text-sm leading-3 tracking-normal mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                                <Link
+                                    href={route("menu.ijin")}
+                                    className="flex items-center"
+                                >
+                                    <div className="w-6 h-6 md:w-8 md:h-8">
+                                        <FaCartArrowDown
+                                            size="20"
+                                            className="mx-auto mt-1"
+                                        />
+                                    </div>
+                                    <span className="ml-2 ">Menu Ijin</span>
                                 </Link>
                             </li>
                             <li>
@@ -197,29 +117,10 @@ export default function Content({ children, user }) {
                                     className="pl-6 text-white text-sm leading-3 tracking-normal mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex items-center"
                                 >
                                     <div className="w-6 h-6 md:w-8 md:h-8">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            className="icon icon-tabler icon-tabler-code"
-                                            viewBox="0 0 24 24"
-                                            strokeWidth="1.5"
-                                            stroke="currentColor"
-                                            fill="none"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                        >
-                                            <path
-                                                stroke="none"
-                                                d="M0 0h24v24H0z"
-                                            />
-                                            <polyline points="7 8 3 12 7 16" />
-                                            <polyline points="17 8 21 12 17 16" />
-                                            <line
-                                                x1={14}
-                                                y1={4}
-                                                x2={10}
-                                                y2={20}
-                                            />
-                                        </svg>
+                                        <FaWrench
+                                            size="20"
+                                            className="mx-auto mt-1"
+                                        />
                                     </div>
                                     <span className="ml-2 ">Pengaturan</span>
                                 </Link>
@@ -582,7 +483,7 @@ export default function Content({ children, user }) {
                                                     className="w-8 h-8 rounded-md"
                                                 />
                                                 <p className="md:text-xl text-white text-base leading-4 ml-2">
-                                                    {user.name}
+                                                    dimas
                                                 </p>
                                             </div>
                                             <ul className="flex">
@@ -766,7 +667,14 @@ export default function Content({ children, user }) {
                                                             </Link>
                                                         </li>
                                                         <li className="flex w-full justify-between text-gray-900 hover:text-indigo-700 cursor-pointer items-center mt-2">
-                                                            <div className="flex items-center">
+                                                            <Link
+                                                                href={route(
+                                                                    "logout"
+                                                                )}
+                                                                as="button"
+                                                                method="post"
+                                                                className="flex items-center"
+                                                            >
                                                                 <svg
                                                                     xmlns="http://www.w3.org/2000/svg"
                                                                     className="icon icon-tabler icon-tabler-logout"
@@ -789,7 +697,7 @@ export default function Content({ children, user }) {
                                                                 <span className="text-sm ml-2">
                                                                     Sign out
                                                                 </span>
-                                                            </div>
+                                                            </Link>
                                                         </li>
                                                     </ul>
                                                 ) : (
@@ -805,7 +713,7 @@ export default function Content({ children, user }) {
                                                 </div>
                                             </div>
                                             <p className="text-white text-sm mx-3">
-                                                {user.name}
+                                                dimas
                                             </p>
                                             <div className="cursor-pointer text-white">
                                                 <svg
@@ -863,7 +771,7 @@ export default function Content({ children, user }) {
                         {/* Navigation ends */}
                         {/* Remove class [ h-64 ] when adding a card block */}
                         <div className="container mx-auto py-10 md:w-4/5 w-11/12 px-6">
-                            {children}
+                            {props.children}
                         </div>
                     </div>
                 </div>

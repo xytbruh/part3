@@ -17,7 +17,7 @@ class CategoryController extends Controller
     public function index()
     {
         $category = new CategoryCollection(Category::orderByDesc('id')->paginate(8));
-        return Inertia::render('Kategori' ,[
+        return Inertia::render('pageAdmin/MenuMarketPlace' ,[
             'title' => 'Kategori',
             'category' => $category,
         ]);
@@ -43,9 +43,7 @@ class CategoryController extends Controller
     {
         $category = new Category();
         $category->title = $request->title;
-        $category->image = $request->image;
-        $category->author = auth()->user()->email;
-        $category->status = $request->status;
+      
         $category->save();
         return redirect()->back()->with('message', 'kategori berhasil dibuat');
     }
@@ -59,7 +57,7 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         $myCategory = $category::all();
-        return Inertia::render('pageAdmin/menuMarketPlace/Kategori', [
+        return Inertia::render('pageAdmin/MenuMarketPlace', [
             'title' => 'Kategori',
             'myCategory' => $myCategory,
         ]);
@@ -71,10 +69,10 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category, Request $request)
+    public function edit(Category $category)
     {
-        return Inertia::render('pageAdmin/menuMarketPlace/Kategori', [
-            'myCategory' => $category->find($request->id)
+        return Inertia::render('pageAdmin/MenuMarketPlace/Edit', [
+            'myCategory' => $category,
         ]);
     }
 
@@ -85,15 +83,18 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, Category $category)
     {
-        Category::where('id', $request->id)->update([
-            'title' => $request->title,
-            'image' => $request->image,
-            'status' => $request->status,
+        $request->validate([
+            'title'   => 'required',
         ]);
-        return to_route('admin/kategori')->with('message', 'update kategori berhasil');
-    }
+
+        //update post
+        $category->update([
+            'title'     => $request->title,
+        ]);
+        return redirect()->back()->with('message', 'kategori berhasil dibuat');
+        }
 
     /**
      * Remove the specified resource from storage.
