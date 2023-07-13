@@ -39,6 +39,7 @@ const TABLE_ROWS = [
 import Content from "./Layouts/Content";
 import { Head, Link } from "@inertiajs/react";
 import Kategori from "./menuMarketPlace/Kategori";
+import Produk from "./menuMarketPlace/Produk";
 
 
 export default function MenuMarketPlace(props) {
@@ -55,82 +56,7 @@ export default function MenuMarketPlace(props) {
                 </TabsHeader>
                 <TabsBody>
                     <TabPanel value="produk">
-                        <Card className="overflow-scroll h-full w-full">
-                            <table className="w-full min-w-max table-auto text-left">
-                                <thead>
-                                    <tr>
-                                        {TABLE_HEAD.map((head) => (
-                                            <th
-                                                key={head}
-                                                className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
-                                            >
-                                                <div
-                                                    variant="small"
-                                                    color="blue-gray"
-                                                    className="font-normal leading-none opacity-70"
-                                                >
-                                                    {head}
-                                                </div>
-                                            </th>
-                                        ))}
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {TABLE_ROWS.map(
-                                        ({ name, job, date }, index) => {
-                                            const isLast =
-                                                index === TABLE_ROWS.length - 1;
-                                            const classes = isLast
-                                                ? "p-4"
-                                                : "p-4 border-b border-blue-gray-50";
-
-                                            return (
-                                                <tr key={name}>
-                                                    <td className={classes}>
-                                                        <div
-                                                            variant="small"
-                                                            color="blue-gray"
-                                                            className="font-normal"
-                                                        >
-                                                            {name}
-                                                        </div>
-                                                    </td>
-                                                    <td className={classes}>
-                                                        <div
-                                                            variant="small"
-                                                            color="blue-gray"
-                                                            className="font-normal"
-                                                        >
-                                                            {job}
-                                                        </div>
-                                                    </td>
-                                                    <td className={classes}>
-                                                        <div
-                                                            variant="small"
-                                                            color="blue-gray"
-                                                            className="font-normal"
-                                                        >
-                                                            {date}
-                                                        </div>
-                                                    </td>
-                                                    <td className={classes}>
-                                                        <div
-                                                            as="a"
-                                                            href="#"
-                                                            variant="small"
-                                                            color="blue"
-                                                            className="font-medium"
-                                                        >
-                                                            Edit
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            );
-                                        }
-                                    )}
-                                </tbody>
-                            </table>
-                        </Card>
+                        <Produk product={props.product}/>
                     </TabPanel>
                     <TabPanel value="kategori">
                         <Kategori category={props.category} />

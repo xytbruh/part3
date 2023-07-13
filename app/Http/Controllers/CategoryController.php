@@ -18,10 +18,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category = Category::all();
-        return Inertia::render('Welcome' ,[
-            'category' => $category,
-        ]);
+        $category = Category::with(['parent'])->orderBy('created_at', 'ASC')->paginate(10);
+        $parent = Category::getParent()->orderBy('name', 'ASC')->get();
+
+        return Inertia::render('pageAdmin/MenuMarketPlace', compact('category', 'parent'));
+        
     }
 
     /**
@@ -42,21 +43,12 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+        $this->validate($request, [
+            'name' => 'required|string|max:50|unique:categories'
         ]);
 
-        $imagePath = null;
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imagePath = $image->store('public');
-        }
-
-        Category::create([
-            'title' => $request->title,
-            'image' => $imagePath,
-        ]);
+        $request->request->add(['slug' => $request->name]);
+        Category::create($request->except('_token'));
         return redirect()->back()->with('message', 'kategori berhasil dibuat');
     }
 
@@ -66,12 +58,9 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show($id)
     {
-        $category = Category::all();
-        return Inertia::render('pageAdmin/MenuMarketPlace', [
-            'category' => $category,
-        ]);
+        //
     }
 
     /**
@@ -80,9 +69,11 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit($id)
     {
-        return Inertia::render('pageAdmin/menuMarketPlace/KategoriEdit', ['category' => $category]);
+        $category = Category::find($id); 
+        $parent = Category::getParent()->orderBy('name', 'ASC')->get(); 
+        return Inertia::render('pageAdmin/menuMarketPlace/KategoriEdit', compact('category', 'parent'));
 
     }
 
@@ -93,22 +84,18 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, $id)
     {
-        $request->validate([
-            'title' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        $this->validate($request, [
+            'name' => 'required|string|max:50|unique:categories,name,' . $id
         ]);
 
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imagePath = $image->store('public');
-            $category->image = $imagePath;
-        }
-
-        $category->title = $request->title;
-        $category = Category::find($request->id);
-        $category->save();
+        $category = Category::find($id); 
+        $category->update([
+            'name' => $request->name,
+            'slug' => $request->name,
+            'parent_id' => $request->parent_id
+        ]);
 
         return to_route('menu.marketplace')->with("message", "kategori berhasil diubah");
         }

@@ -1,11 +1,10 @@
 import AddCategory from "@/utils/AddCategory";
-import EditCategory from "@/utils/EditCategory";
 import { Link } from "@inertiajs/react";
 import { Card } from "@material-tailwind/react";
 import React from "react";
 
-export default function Kategori(props) {
-    const TABLE_HEAD_CATEGORY = ["No", "Judul", "Image"];
+export default function Kategori({ category }) {
+    const TABLE_HEAD_CATEGORY = ["No", "Kategori", "Parent", "Created At"];
     return (
         <Card className="overflow-scroll h-full w-full">
             <table className="w-full min-w-max table-auto text-left">
@@ -31,14 +30,14 @@ export default function Kategori(props) {
                                 color="blue-gray"
                                 className="font-normal leading-none opacity-70"
                             >
-                                <AddCategory />
+                                <AddCategory category={category.data} />
                             </div>
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    {props.category.map((category, index) => {
-                        const isLast = index === props.category.length - 1;
+                    {category.data.map((category, index) => {
+                        const isLast = index === category.length - 1;
                         const classes = isLast
                             ? "p-4"
                             : "p-4 border-b border-blue-gray-50";
@@ -60,7 +59,7 @@ export default function Kategori(props) {
                                         color="blue-gray"
                                         className="font-normal text-sm"
                                     >
-                                        {category.title}
+                                        {category.name}
                                     </div>
                                 </td>
                                 <td className={classes}>
@@ -69,17 +68,27 @@ export default function Kategori(props) {
                                         color="blue-gray"
                                         className="font-normal text-sm"
                                     >
-                                        <img
-                                            src={`${category.image}`}
-                                            width="30"
-                                            alt={category.title}
-                                        />
+                                        {category.parent}
                                     </div>
                                 </td>
 
                                 <td className={classes}>
-                                    <EditCategory EditCategory={category} />
-                                    <Link href={route("edit.kategori")} method="get" data={{id : category.id}} as="button">Edit</Link>
+                                    <div
+                                        variant="small"
+                                        color="blue-gray"
+                                        className="font-normal text-sm"
+                                    >
+                                        {category.created_at}
+                                    </div>
+                                </td>
+
+                                <td className={classes}>
+                                    <Link
+                                        href={route("edit.kategori", category.id)}
+                                        as="button"
+                                    >
+                                        Edit
+                                    </Link>
                                     <Link
                                         href={route("delete.kategori")}
                                         method="post"

@@ -4,46 +4,43 @@ import Content from "../Layouts/Content";
 import { router } from "@inertiajs/react";
 
 export default function KategoriEdit({ category }) {
-    console.log(category);
-    const [title, setTitle] = useState(category.title);
-    const [image, setImage] = useState(null);
+    const [name, setName] = useState(category.name);
+    const [parent, setParent] = useState(category.name);
 
     const handleSubmit = () => {
         const data = {
-            title,
-            image,
+            name,
+            parent,
         };
-        router.put(`/admin/menu-marketplace/update`, data);
+        router.put((`/admin/menu-marketplace/edit`, category.id), data);
     };
     return (
         <Content>
             <Input
                 label="kategori"
-                onChange={(title) => {
-                    setTitle(title.target.value);
+                onChange={(name) => {
+                    setName(name.target.value);
                 }}
-                defaultValue={category.title}
+                defaultValue={category.name}
                 size="lg"
             />
-            <div>
-                <label>Current Image:</label>
-                {category.image && (
-                    <img
-                        src={category.image}
-                        alt={category.title}
-                        style={{ width: "100px" }}
-                    />
-                )}
+            <div className="flex w-full flex-col gap-6 py-3">
+                <select
+                    className="bg-transparent rounded-md"
+                    value={parent}
+                    onChange={(e) => {
+                        setParent(e.target.value);
+                    }}
+                >
+                    <option className="bg-transparent text-black " value="">
+                        None
+                    </option>
+
+                    <option className="bg-transparent text-black ">
+                        {category.name}
+                    </option>
+                </select>
             </div>
-            <Input
-                label="New Image"
-                type="file"
-                accept="image/*"
-                onChange={(image) => {
-                    setImage(image.target.files[0]);
-                }}
-                size="lg"
-            />
             <Button
                 onClick={() => handleSubmit()}
                 type="submit"

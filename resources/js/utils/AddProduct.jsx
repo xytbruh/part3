@@ -12,7 +12,7 @@ import {
 } from "@material-tailwind/react";
 import { router } from "@inertiajs/react";
 
-export default function AddCategory({ category }) {
+export default function AddProduct({ product }) {
     const handleOpen = () => setOpen((cur) => !cur);
     const [open, setOpen] = useState(false);
     const [name, setName] = useState("");
@@ -67,13 +67,13 @@ export default function AddCategory({ category }) {
                                     }}
                                 >
                                     <option value="">None</option>
-                                    {category.map((category, index) => (
+                                    {/* {product.map((product, index) => (
                                         <>
                                             <option key={index}>
-                                                {category.name}
+                                                {product.name}
                                             </option>
                                         </>
-                                    ))}
+                                    ))} */}
                                 </select>
                             </div>
                         </CardBody>

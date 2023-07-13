@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -62,10 +63,20 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified']], functi
     Route::get('pengaturan', function () {
         return Inertia::render('pageAdmin/Pengaturan');
     })->name('pengaturan');
+
+    // Route::get('menu-marketplace', [ProductController::class, 'store' ]); 
+    // Route::get('menu-marketplace', [ProductController::class, 'index' ])->name('menu-marketplace'); 
+    // Route::get('menu-marketplace/edit/{product}', [ProductController::class, 'edit' ])->name('edit.produk'); 
+    // Route::get('menu-marketplace/update/{product}', [ProductController::class, 'update' ]); 
+    // Route::get('menu-marketplace/delete', [ProductController::class, 'destroy' ])->name("delete.produk"); 
+    // Route::get('/product/bulk', [ProductController::class, 'massUploadForm'])->name('product.bulk'); 
+    // Route::post('/product/bulk', [ProductController::class, 'massUpload'])->name('product.saveBulk');
+
+
     Route::post('menu-marketplace', [CategoryController::class, 'store'] );
-    Route::get('menu-marketplace', [CategoryController::class, 'show'] )->name('menu.marketplace');
-    Route::get('menu-marketplace/edit ', [CategoryController::class, 'edit'] )->name('edit.kategori');
-    Route::put('menu-marketplace/update', [CategoryController::class, 'update'] )->name('update.kategori');
+    Route::get('menu-marketplace', [CategoryController::class, 'index'] )->name('menu.marketplace');
+    Route::get('menu-marketplace/edit/{category} ', [CategoryController::class, 'edit'] )->name('edit.kategori');
+    Route::put('menu-marketplace/update/{category}', [CategoryController::class, 'update'] );
     Route::post('menu-marketplace/delete', [CategoryController::class, 'destroy'] )->name('delete.kategori');
 });
 
