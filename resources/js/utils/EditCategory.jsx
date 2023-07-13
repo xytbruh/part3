@@ -12,15 +12,17 @@ import {
 import { router } from "@inertiajs/react";
 
 export default function EditCategory({ EditCategory }) {
-    const [title, setTitle] = useState("");
-
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen((cur) => !cur);
-    const editCategory = () => {
+    const [title, setTitle] = useState(EditCategory.title);
+    const [image, setImage] = useState(null);
+
+    const handleSubmit = () => {
         const data = {
             title,
+            image,
         };
-        router.put(`menu-marketplace/update`, data);
+        router.put("/admin/menu-marketplace/update", data);
         setTitle("");
         setOpen(false);
     };
@@ -58,10 +60,30 @@ export default function EditCategory({ EditCategory }) {
                             defaultValue={EditCategory.title}
                             size="lg"
                         />
+                        <div>
+                            <label>Current Image:</label>
+                            {EditCategory.image && (
+                                <img
+                                    src={EditCategory.image}
+                                    alt={EditCategory.title}
+                                    style={{ width: "100px" }}
+                                />
+                            )}
+                        </div>
+                        <Input
+                            label="New Image"
+                            type="file"
+                            accept="image/*"
+                            onChange={(image) => {
+                                setImage(image.target.files[0]);
+                            }}
+                            size="lg"
+                        />
                     </CardBody>
                     <CardFooter className="pt-0">
                         <Button
-                            onClick={() => editCategory()}
+                            onClick={() => handleSubmit()}
+                            type="submit"
                             variant="gradient"
                             fullWidth
                         >

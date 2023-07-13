@@ -38,6 +38,7 @@ const TABLE_ROWS = [
 ];
 
 import Content from "./Layouts/Content";
+import { Head } from "@inertiajs/react";
 
 export default function MenuProfil() {
     const data = [
@@ -77,7 +78,8 @@ export default function MenuProfil() {
     ];
 
     return (
-        <Content>
+        <>
+        <Head />
             <Tabs value="menu-profil">
                 <TabsHeader>
                     <Tab value="logo">Logo</Tab>
@@ -400,6 +402,7 @@ export default function MenuProfil() {
                     </TabPanel>
                 </TabsBody>
             </Tabs>
-        </Content>
+        </>
     );
 }
+MenuIjin.layout = (page) => <Content children={page} />;

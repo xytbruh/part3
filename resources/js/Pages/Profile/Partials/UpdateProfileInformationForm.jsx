@@ -4,7 +4,6 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 import { Link, useForm, usePage } from "@inertiajs/react";
 import { Transition } from "@headlessui/react";
-import ImageInput from "@/Components/ImageInput";
 
 export default function UpdateProfileInformation({
     mustVerifyEmail,
@@ -19,12 +18,12 @@ export default function UpdateProfileInformation({
             email: user.email,
             avatar: user.avatar,
         });
-    console.log("data", data);
     const submit = (e) => {
         e.preventDefault();
 
         patch(route("profile.update"));
     };
+   
 
     return (
         <section className={className}>
@@ -66,20 +65,6 @@ export default function UpdateProfileInformation({
                         onChange={(e) => setData("email", e.target.value)}
                         required
                         autoComplete="username"
-                    />
-
-                    <InputError className="mt-2" message={errors.email} />
-                </div>
-                <div>
-                    <InputLabel htmlFor="avatar" value="Avatar" />
-
-                    <ImageInput
-                        type="text"
-                        id="avatar"
-                        className="mt-1 block w-full"
-                        value={data.avatar}
-                        onChange={(e) => setData("avatar", e.target.value)}
-
                     />
 
                     <InputError className="mt-2" message={errors.email} />

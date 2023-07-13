@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Resources\CategoryCollection;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class CategoryController extends Controller
@@ -16,9 +18,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category = new CategoryCollection(Category::orderByDesc('id')->paginate(8));
-        return Inertia::render('pageAdmin/MenuMarketPlace' ,[
-            'title' => 'Kategori',
+        $category = Category::all();
+        return Inertia::render('Welcome' ,[
             'category' => $category,
         ]);
     }
@@ -41,10 +42,21 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $category = new Category();
-        $category->title = $request->title;
-      
-        $category->save();
+        $request->validate([
+            'title' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imagePath = $image->store('public');
+        }
+
+        Category::create([
+            'title' => $request->title,
+            'image' => $imagePath,
+        ]);
         return redirect()->back()->with('message', 'kategori berhasil dibuat');
     }
 
@@ -56,10 +68,9 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        $myCategory = $category::all();
+        $category = Category::all();
         return Inertia::render('pageAdmin/MenuMarketPlace', [
-            'title' => 'Kategori',
-            'myCategory' => $myCategory,
+            'category' => $category,
         ]);
     }
 
@@ -71,9 +82,8 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return Inertia::render('pageAdmin/MenuMarketPlace/Edit', [
-            'myCategory' => $category,
-        ]);
+        return Inertia::render('pageAdmin/menuMarketPlace/KategoriEdit', ['category' => $category]);
+
     }
 
     /**
@@ -86,14 +96,21 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $request->validate([
-            'title'   => 'required',
+            'title' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        //update post
-        $category->update([
-            'title'     => $request->title,
-        ]);
-        return redirect()->back()->with('message', 'kategori berhasil dibuat');
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imagePath = $image->store('public');
+            $category->image = $imagePath;
+        }
+
+        $category->title = $request->title;
+        $category = Category::find($request->id);
+        $category->save();
+
+        return to_route('menu.marketplace')->with("message", "kategori berhasil diubah");
         }
 
     /**

@@ -11,17 +11,20 @@ import {
 } from "@material-tailwind/react";
 import { router } from "@inertiajs/react";
 
-export default function AddCategory(props) {
-    const [title, setTitle] = useState("");
-    const [open, setOpen] = useState(false);
+export default function AddCategory() {
     const handleOpen = () => setOpen((cur) => !cur);
+    const [open, setOpen] = useState(false);
+    const [title, setTitle] = useState("");
+    const [image, setImage] = useState(null);
 
-    const addCategory = () => {
-        const data = {
-            title,
-        };
-        router.post("menu-marketplace", data);
-        setTitle("");
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        const formData = new FormData();
+        formData.append("title", title);
+        formData.append("image", image);
+
+        router.post("/admin/menu-marketplace", formData);
         setOpen(false);
     };
     return (
@@ -45,26 +48,35 @@ export default function AddCategory(props) {
                             Tambah Kategori
                         </Typography>
                     </CardHeader>
-                    <CardBody className="flex flex-col gap-4">
-                        <Input
-                            label="kategori"
-                            value={title}
-                            onChange={(e) => {
-                                setTitle(e.target.value);
-                            }}
-                            size="lg"
-                        />
-                    </CardBody>
-                    <CardFooter className="pt-0">
-                        <Button
-                            variant="gradient"
-                            onClick={() => addCategory()}
-                            color="green"
-                            fullWidth
-                        >
-                            Tambah
-                        </Button>
-                    </CardFooter>
+                    <form onSubmit={handleSubmit}>
+                        <CardBody className="flex flex-col gap-4">
+                            <Input
+                                label="kategori"
+                                value={title}
+                                onChange={(e) => {
+                                    setTitle(e.target.value);
+                                }}
+                                size="lg"
+                            />
+                            <Input
+                                label="Image"
+                                type="file"
+                                accept="image/*"
+                                onChange={(e) => setImage(e.target.files[0])}
+                                size="lg"
+                            />
+                        </CardBody>
+                        <CardFooter className="pt-0">
+                            <Button
+                                variant="gradient"
+                                type="submit"
+                                color="green"
+                                fullWidth
+                            >
+                                Tambah
+                            </Button>
+                        </CardFooter>
+                    </form>
                 </Card>
             </Dialog>
         </div>

@@ -1,81 +1,103 @@
+import AddCategory from "@/utils/AddCategory";
+import EditCategory from "@/utils/EditCategory";
+import { Link } from "@inertiajs/react";
+import { Card } from "@material-tailwind/react";
 import React from "react";
-import Content from "../Layouts/Content";
-import { Head, Link } from "@inertiajs/react";
-import BreadCrumbs from "@/Components/BreadCrumbs";
 
 export default function Kategori(props) {
-    console.log(props);
+    const TABLE_HEAD_CATEGORY = ["No", "Judul", "Image"];
     return (
-        <Content>
-            <Head title={props.title} />
-            <BreadCrumbs title={props.title} />
+        <Card className="overflow-scroll h-full w-full">
+            <table className="w-full min-w-max table-auto text-left">
+                <thead>
+                    <tr>
+                        {TABLE_HEAD_CATEGORY.map((head) => (
+                            <th
+                                key={head}
+                                className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
+                            >
+                                <div
+                                    variant="small"
+                                    color="blue-gray"
+                                    className="font-normal leading-none opacity-70"
+                                >
+                                    {head}
+                                </div>
+                            </th>
+                        ))}
+                        <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
+                            <div
+                                variant="small"
+                                color="blue-gray"
+                                className="font-normal leading-none opacity-70"
+                            >
+                                <AddCategory />
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {props.category.map((category, index) => {
+                        const isLast = index === props.category.length - 1;
+                        const classes = isLast
+                            ? "p-4"
+                            : "p-4 border-b border-blue-gray-50";
 
-            <div className=" overflow-x-auto">
-                <button className="float-right mx-12 bg-green-300 p-2 rounded-md text-base-300">
-                    Tambah
-                </button>
-                <table className="w-full">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Judul</th>
-                            <th>Foto</th>
-                            <th>Author</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {props.myCategory && props.myCategory.length > 0 ? (
-                            props.myCategory.map((category, i) => {
-                                return (
-                                    <tr key={i}>
-                                        <td className="whitespace-nowrap">
-                                            {i + 1}
-                                        </td>
-                                        <td className="whitespace-nowrap">
-                                            {category.title}
-                                        </td>
-                                        <td className="whitespace-nowrap">
-                                            <img
-                                                src={category.image}
-                                                width="50"
-                                                alt=""
-                                            />
-                                        </td>
-                                        <td className="whitespace-nowrap">
-                                            {category.author}
-                                        </td>
-                                        <td>
-                                            <button className="btn btn-ghost text-base-300 btn-xs bg-primary mr-1">
-                                                Edit
-                                            </button>
-                                            <Link
-                                                href={route("delete.kategori")}
-                                                method="post"
-                                                data={{ id: category.id }}
-                                                as="button"
-                                                className="btn btn-ghost text-base-300 btn-xs bg-red-600"
-                                            >
-                                                Delete
-                                            </Link>
-                                        </td>
-                                    </tr>
-                                );
-                            })
-                        ) : (
-                            <p>Kamu belum Punya Kategori</p>
-                        )}
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>Judul</th>
-                            <th>Foto</th>
-                            <th>Author</th>
-                            <th></th>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
-        </Content>
+                        return (
+                            <tr key={index}>
+                                <td className={classes}>
+                                    <div
+                                        variant="small"
+                                        color="blue-gray"
+                                        className="font-normal text-sm"
+                                    >
+                                        {index + 1}
+                                    </div>
+                                </td>
+                                <td className={classes}>
+                                    <div
+                                        variant="small"
+                                        color="blue-gray"
+                                        className="font-normal text-sm"
+                                    >
+                                        {category.title}
+                                    </div>
+                                </td>
+                                <td className={classes}>
+                                    <div
+                                        variant="small"
+                                        color="blue-gray"
+                                        className="font-normal text-sm"
+                                    >
+                                        <img
+                                            src={`${category.image}`}
+                                            width="30"
+                                            alt={category.title}
+                                        />
+                                    </div>
+                                </td>
+
+                                <td className={classes}>
+                                    <EditCategory EditCategory={category} />
+                                    <Link href={route("edit.kategori")} method="get" data={{id : category.id}} as="button">Edit</Link>
+                                    <Link
+                                        href={route("delete.kategori")}
+                                        method="post"
+                                        data={{
+                                            id: category.id,
+                                        }}
+                                        as="button"
+                                        variant="small"
+                                        className="font-medium bg-red-500 px-2 mx-1 rounded-md text-black"
+                                    >
+                                        Hapus
+                                    </Link>
+                                </td>
+                            </tr>
+                        );
+                    })}
+                </tbody>
+            </table>
+        </Card>
     );
 }

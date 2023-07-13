@@ -1,9 +1,13 @@
+import { Head } from "@inertiajs/react";
 import Content from "./Layouts/Content";
 
 export default function Dashboard(props) {
+    console.log(props);
     return (
-        <Content >
+        <>
+            <Head title="Dashboard" />
             <div>Ini Dashboard</div>
-        </Content>
+        </>
     );
 }
+Dashboard.layout = (page) => <Content children={page} />;

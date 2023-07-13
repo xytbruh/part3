@@ -38,6 +38,7 @@ const TABLE_ROWS = [
 ];
 
 import Content from "./Layouts/Content";
+import { Head } from "@inertiajs/react";
 
 export default function MenuMaster() {
     const data = [
@@ -77,7 +78,8 @@ export default function MenuMaster() {
     ];
 
     return (
-        <Content>
+        <>
+        <Head title="Menu Master"/>
             <Tabs value="menu-master">
                 <TabsHeader>
                     <Tab value="user">User</Tab>
@@ -321,6 +323,8 @@ export default function MenuMaster() {
                     </TabPanel>
                 </TabsBody>
             </Tabs>
-        </Content>
+        </>
     );
 }
+MenuMaster.layout = (page) => <Content children={page} />;
+

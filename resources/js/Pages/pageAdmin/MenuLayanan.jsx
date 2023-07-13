@@ -38,6 +38,7 @@ const TABLE_ROWS = [
 ];
 
 import Content from "./Layouts/Content";
+import { Head } from "@inertiajs/react";
 
 export default function MenuLayanan() {
     const data = [
@@ -77,7 +78,8 @@ export default function MenuLayanan() {
     ];
 
     return (
-        <Content>
+        <>
+            <Head title="Menu Layanan" />
             <Tabs value="menu-layanan">
                 <TabsHeader>
                     <Tab value="pro">Pro</Tab>
@@ -400,6 +402,7 @@ export default function MenuLayanan() {
                     </TabPanel>
                 </TabsBody>
             </Tabs>
-        </Content>
+        </>
     );
 }
+MenuLayanan.layout = (page) => <Content children={page} />;

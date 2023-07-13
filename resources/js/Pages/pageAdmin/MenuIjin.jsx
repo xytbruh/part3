@@ -38,6 +38,7 @@ const TABLE_ROWS = [
 ];
 
 import Content from "./Layouts/Content";
+import { Head } from "@inertiajs/react";
 
 export default function MenuIjin() {
     const data = [
@@ -77,7 +78,8 @@ export default function MenuIjin() {
     ];
 
     return (
-        <Content>
+        <>
+        <Head title="Menu Ijin"/>
             <Tabs value="menu-ijin">
                 <TabsHeader>
                     <Tab value="pergantian">Pergantian Lokasi</Tab>
@@ -400,6 +402,7 @@ export default function MenuIjin() {
                     </TabPanel>
                 </TabsBody>
             </Tabs>
-        </Content>
+        </>
     );
 }
+MenuIjin.layout = (page) => <Content children={page} />;

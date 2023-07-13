@@ -33,8 +33,6 @@ class CategoryFactory extends Factory
         return [
             'title' => fake()->jobTitle(),
             'image' => $randomImages[rand(0, 10)],
-            'author' => fake()->email(),
-            'status' => fake()->randomElement(['Y', "N"]),
             
         ];
     }
