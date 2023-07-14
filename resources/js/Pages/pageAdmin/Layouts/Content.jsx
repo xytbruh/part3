@@ -19,7 +19,7 @@ import {
 } from "@heroicons/react/24/solid";
 import { ChevronRightIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
 
-export default function Content(props) {
+export default function Content({children}) {
     const [open, setOpen] = useState(0);
 
     const handleOpen = (value) => {
@@ -618,246 +618,570 @@ export default function Content(props) {
                                             </svg>
                                         </div>
                                     </div>
-                                    <ul
-                                        aria-orientation="vertical"
-                                        className=" py-6"
-                                    >
-                                        <li>
-                                            <Link className="pl-6 text-white text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex items-center">
-                                                <div className="w-6 h-6 md:w-8 md:h-8">
-                                                    <svg
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        className="icon icon-tabler icon-tabler-grid"
-                                                        viewBox="0 0 24 24"
-                                                        strokeWidth="1.5"
-                                                        stroke="currentColor"
-                                                        fill="none"
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                    >
-                                                        <path
-                                                            stroke="none"
-                                                            d="M0 0h24v24H0z"
-                                                        />
-                                                        <rect
-                                                            x={4}
-                                                            y={4}
-                                                            width={6}
-                                                            height={6}
-                                                            rx={1}
-                                                        />
-                                                        <rect
-                                                            x={14}
-                                                            y={4}
-                                                            width={6}
-                                                            height={6}
-                                                            rx={1}
-                                                        />
-                                                        <rect
-                                                            x={4}
-                                                            y={14}
-                                                            width={6}
-                                                            height={6}
-                                                            rx={1}
-                                                        />
-                                                        <rect
-                                                            x={14}
-                                                            y={14}
-                                                            width={6}
-                                                            height={6}
-                                                            rx={1}
-                                                        />
-                                                    </svg>
-                                                </div>
-                                                <span className="ml-2 xl:text-base md:text-2xl text-base">
+                                    <List>
+                                        <ListItem>
+                                            <ListItemPrefix>
+                                                <UserCircleIcon
+                                                    className="h-5 w-5"
+                                                    color="white"
+                                                />
+                                            </ListItemPrefix>
+                                            <Link href={route("dashboard")}>
+                                                <Typography
+                                                    color="white"
+                                                    className="mr-auto font-normal"
+                                                >
                                                     Dashboard
-                                                </span>
+                                                </Typography>
                                             </Link>
-                                        </li>
-                                        <li>
-                                            <Link className="pl-6 text-white text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex items-center">
-                                                <div className="w-6 h-6 md:w-8 md:h-8">
-                                                    <svg
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        className="icon icon-tabler icon-tabler-puzzle"
-                                                        viewBox="0 0 24 24"
-                                                        strokeWidth="1.5"
-                                                        stroke="currentColor"
-                                                        fill="none"
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
+                                        </ListItem>
+                                        <Accordion
+                                            open={open === 1}
+                                            icon={
+                                                <ChevronDownIcon
+                                                    strokeWidth={2.5}
+                                                    className={`mx-auto h-4 w-4 transition-transform text-white${
+                                                        open === 1
+                                                            ? "rotate-180"
+                                                            : ""
+                                                    }`}
+                                                />
+                                            }
+                                        >
+                                            <ListItem
+                                                className="p-0"
+                                                selected={open === 1}
+                                            >
+                                                <AccordionHeader
+                                                    onClick={() =>
+                                                        handleOpen(1)
+                                                    }
+                                                    className="border-b-0 p-3"
+                                                >
+                                                    <ListItemPrefix>
+                                                        <PresentationChartBarIcon
+                                                            className="h-5 w-5"
+                                                            color="white"
+                                                        />
+                                                    </ListItemPrefix>
+                                                    <Typography
+                                                        color="white"
+                                                        className="mr-auto font-normal"
                                                     >
-                                                        <path
-                                                            stroke="none"
-                                                            d="M0 0h24v24H0z"
+                                                        Menu Master
+                                                    </Typography>
+                                                </AccordionHeader>
+                                            </ListItem>
+                                            <AccordionBody className="py-1">
+                                                <List className="p-0">
+                                                    <ListItem>
+                                                        <ListItemPrefix>
+                                                            <ChevronRightIcon
+                                                                strokeWidth={3}
+                                                                className="h-3 w-5"
+                                                                color="white"
+                                                            />
+                                                        </ListItemPrefix>
+                                                        <Typography color="white">
+                                                            User
+                                                        </Typography>
+                                                    </ListItem>
+                                                    <ListItem>
+                                                        <ListItemPrefix>
+                                                            <ChevronRightIcon
+                                                                strokeWidth={3}
+                                                                className="h-3 w-5"
+                                                                color="white"
+                                                            />
+                                                        </ListItemPrefix>
+                                                        <Typography color="white">
+                                                            Penyedia
+                                                        </Typography>
+                                                    </ListItem>
+                                                    <ListItem>
+                                                        <ListItemPrefix>
+                                                            <ChevronRightIcon
+                                                                strokeWidth={3}
+                                                                className="h-3 w-5"
+                                                                color="white"
+                                                            />
+                                                        </ListItemPrefix>
+                                                        <Typography color="white">
+                                                            Fitur
+                                                        </Typography>
+                                                    </ListItem>
+                                                </List>
+                                            </AccordionBody>
+                                        </Accordion>
+                                        <Accordion
+                                            open={open === 2}
+                                            icon={
+                                                <ChevronDownIcon
+                                                    color="white"
+                                                    strokeWidth={2.5}
+                                                    className={`mx-auto h-4 w-4 transition-transform ${
+                                                        open === 2
+                                                            ? "rotate-180"
+                                                            : ""
+                                                    }`}
+                                                />
+                                            }
+                                        >
+                                            <ListItem
+                                                className="p-0"
+                                                selected={open === 2}
+                                            >
+                                                <AccordionHeader
+                                                    onClick={() =>
+                                                        handleOpen(2)
+                                                    }
+                                                    className="border-b-0 p-3"
+                                                >
+                                                    <ListItemPrefix>
+                                                        <ShoppingBagIcon
+                                                            className="h-5 w-5"
+                                                            color="white"
                                                         />
-                                                        <path d="M4 7h3a1 1 0 0 0 1 -1v-1a2 2 0 0 1 4 0v1a1 1 0 0 0 1 1h3a1 1 0 0 1 1 1v3a1 1 0 0 0 1 1h1a2 2 0 0 1 0 4h-1a1 1 0 0 0 -1 1v3a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-1a2 2 0 0 0 -4 0v1a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1h1a2 2 0 0 0 0 -4h-1a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1" />
-                                                    </svg>
-                                                </div>
-                                                <span className="ml-2 xl:text-base md:text-2xl text-base">
-                                                    Menu Master
-                                                </span>
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link className="pl-6 text-white text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex items-center">
-                                                <div className="w-6 h-6 md:w-8 md:h-8">
-                                                    <svg
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        className="icon icon-tabler icon-tabler-compass"
-                                                        viewBox="0 0 24 24"
-                                                        strokeWidth="1.5"
-                                                        stroke="currentColor"
-                                                        fill="none"
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
+                                                    </ListItemPrefix>
+                                                    <Typography
+                                                        color="white"
+                                                        className="mr-auto font-normal"
                                                     >
-                                                        <path
-                                                            stroke="none"
-                                                            d="M0 0h24v24H0z"
+                                                        Menu Profil
+                                                    </Typography>
+                                                </AccordionHeader>
+                                            </ListItem>
+                                            <AccordionBody className="py-1">
+                                                <List className="p-0">
+                                                    <ListItem>
+                                                        <ListItemPrefix>
+                                                            <ChevronRightIcon
+                                                                strokeWidth={3}
+                                                                className="h-3 w-5"
+                                                                color="white"
+                                                            />
+                                                        </ListItemPrefix>
+                                                        <Typography color="white">
+                                                            Logo
+                                                        </Typography>
+                                                    </ListItem>
+                                                    <ListItem>
+                                                        <ListItemPrefix>
+                                                            <ChevronRightIcon
+                                                                strokeWidth={3}
+                                                                className="h-3 w-5"
+                                                                color="white"
+                                                            />
+                                                        </ListItemPrefix>
+                                                        <Typography color="white">
+                                                            Alamat
+                                                        </Typography>
+                                                    </ListItem>
+                                                    <ListItem>
+                                                        <ListItemPrefix>
+                                                            <ChevronRightIcon
+                                                                strokeWidth={3}
+                                                                className="h-3 w-5"
+                                                                color="white"
+                                                            />
+                                                        </ListItemPrefix>
+                                                        <Typography color="white">
+                                                            Sosial Media
+                                                        </Typography>
+                                                    </ListItem>
+                                                    <ListItem>
+                                                        <ListItemPrefix>
+                                                            <ChevronRightIcon
+                                                                strokeWidth={3}
+                                                                className="h-3 w-5"
+                                                                color="white"
+                                                            />
+                                                        </ListItemPrefix>
+                                                        <Typography color="white">
+                                                            Banner Iklan
+                                                        </Typography>
+                                                    </ListItem>
+                                                </List>
+                                            </AccordionBody>
+                                        </Accordion>
+                                        <Accordion
+                                            open={open === 3}
+                                            icon={
+                                                <ChevronDownIcon
+                                                    color="white"
+                                                    strokeWidth={2.5}
+                                                    className={`mx-auto h-4 w-4 transition-transform ${
+                                                        open === 3
+                                                            ? "rotate-180"
+                                                            : ""
+                                                    }`}
+                                                />
+                                            }
+                                        >
+                                            <ListItem
+                                                className="p-0"
+                                                selected={open === 3}
+                                            >
+                                                <AccordionHeader
+                                                    onClick={() =>
+                                                        handleOpen(3)
+                                                    }
+                                                    className="border-b-0 p-3"
+                                                >
+                                                    <ListItemPrefix>
+                                                        <ShoppingBagIcon
+                                                            className="h-5 w-5"
+                                                            color="white"
                                                         />
-                                                        <polyline points="8 16 10 10 16 8 14 14 8 16" />
-                                                        <circle
-                                                            cx={12}
-                                                            cy={12}
-                                                            r={9}
-                                                        />
-                                                    </svg>
-                                                </div>
-                                                <span className="ml-2 xl:text-base md:text-2xl text-base">
-                                                    Menu Profil
-                                                </span>
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link className="pl-6 text-white text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex items-center">
-                                                <div className="w-6 h-6 md:w-8 md:h-8">
-                                                    <svg
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        className="icon icon-tabler icon-tabler-code"
-                                                        viewBox="0 0 24 24"
-                                                        strokeWidth="1.5"
-                                                        stroke="currentColor"
-                                                        fill="none"
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
+                                                    </ListItemPrefix>
+                                                    <Typography
+                                                        color="white"
+                                                        className="mr-auto font-normal"
                                                     >
-                                                        <path
-                                                            stroke="none"
-                                                            d="M0 0h24v24H0z"
+                                                        Menu Layanan
+                                                    </Typography>
+                                                </AccordionHeader>
+                                            </ListItem>
+                                            <AccordionBody className="py-1">
+                                                <List className="p-0">
+                                                    <ListItem>
+                                                        <ListItemPrefix>
+                                                            <ChevronRightIcon
+                                                                strokeWidth={3}
+                                                                className="h-3 w-5"
+                                                                color="white"
+                                                            />
+                                                        </ListItemPrefix>
+                                                        <Typography color="white">
+                                                            Penyedia Pro
+                                                        </Typography>
+                                                    </ListItem>
+                                                    <ListItem>
+                                                        <ListItemPrefix>
+                                                            <ChevronRightIcon
+                                                                strokeWidth={3}
+                                                                className="h-3 w-5"
+                                                                color="white"
+                                                            />
+                                                        </ListItemPrefix>
+                                                        <Typography color="white">
+                                                            Penyedia Medium
+                                                        </Typography>
+                                                    </ListItem>
+                                                    <ListItem>
+                                                        <ListItemPrefix>
+                                                            <ChevronRightIcon
+                                                                strokeWidth={3}
+                                                                className="h-3 w-5"
+                                                                color="white"
+                                                            />
+                                                        </ListItemPrefix>
+                                                        <Typography color="white">
+                                                            Penyedia Free
+                                                        </Typography>
+                                                    </ListItem>
+                                                    <ListItem>
+                                                        <ListItemPrefix>
+                                                            <ChevronRightIcon
+                                                                strokeWidth={3}
+                                                                className="h-3 w-5"
+                                                                color="white"
+                                                            />
+                                                        </ListItemPrefix>
+                                                        <Typography color="white">
+                                                            Tambah
+                                                        </Typography>
+                                                    </ListItem>
+                                                </List>
+                                            </AccordionBody>
+                                        </Accordion>
+                                        <Accordion
+                                            open={open === 4}
+                                            icon={
+                                                <ChevronDownIcon
+                                                    color="white"
+                                                    strokeWidth={2.5}
+                                                    className={`mx-auto h-4 w-4 transition-transform ${
+                                                        open === 4
+                                                            ? "rotate-180"
+                                                            : ""
+                                                    }`}
+                                                />
+                                            }
+                                        >
+                                            <ListItem
+                                                className="p-0"
+                                                selected={open === 4}
+                                            >
+                                                <AccordionHeader
+                                                    onClick={() =>
+                                                        handleOpen(4)
+                                                    }
+                                                    className="border-b-0 p-3"
+                                                >
+                                                    <ListItemPrefix>
+                                                        <ShoppingBagIcon
+                                                            className="h-5 w-5"
+                                                            color="white"
                                                         />
-                                                        <polyline points="7 8 3 12 7 16" />
-                                                        <polyline points="17 8 21 12 17 16" />
-                                                        <line
-                                                            x1={14}
-                                                            y1={4}
-                                                            x2={10}
-                                                            y2={20}
-                                                        />
-                                                    </svg>
-                                                </div>
-                                                <span className="ml-2 xl:text-base md:text-2xl text-base">
-                                                    Menu Layanan
-                                                </span>
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link className="pl-6 text-white text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex items-center">
-                                                <div className="w-6 h-6 md:w-8 md:h-8">
-                                                    <svg
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        className="icon icon-tabler icon-tabler-code"
-                                                        viewBox="0 0 24 24"
-                                                        strokeWidth="1.5"
-                                                        stroke="currentColor"
-                                                        fill="none"
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
+                                                    </ListItemPrefix>
+                                                    <Typography
+                                                        color="white"
+                                                        className="mr-auto font-normal"
                                                     >
-                                                        <path
-                                                            stroke="none"
-                                                            d="M0 0h24v24H0z"
+                                                        Menu MarketPlace
+                                                    </Typography>
+                                                </AccordionHeader>
+                                            </ListItem>
+                                            <AccordionBody className="py-1">
+                                                <List className="p-0">
+                                                    <ListItem>
+                                                        <ListItemPrefix>
+                                                            <ChevronRightIcon
+                                                                strokeWidth={3}
+                                                                className="h-3 w-5"
+                                                                color="white"
+                                                            />
+                                                        </ListItemPrefix>
+                                                        <Link
+                                                            href={route(
+                                                                "produk"
+                                                            )}
+                                                        >
+                                                            <Typography color="white">
+                                                                Produk
+                                                            </Typography>
+                                                        </Link>
+                                                    </ListItem>
+                                                    <ListItem>
+                                                        <ListItemPrefix>
+                                                            <ChevronRightIcon
+                                                                strokeWidth={3}
+                                                                className="h-3 w-5"
+                                                                color="white"
+                                                            />
+                                                        </ListItemPrefix>
+                                                        <Link
+                                                            href={route(
+                                                                "kategori"
+                                                            )}
+                                                        >
+                                                            <Typography color="white">
+                                                                Kategori
+                                                            </Typography>
+                                                        </Link>
+                                                    </ListItem>
+                                                    <ListItem>
+                                                        <ListItemPrefix>
+                                                            <ChevronRightIcon
+                                                                strokeWidth={3}
+                                                                className="h-3 w-5"
+                                                                color="white"
+                                                            />
+                                                        </ListItemPrefix>
+                                                        <Typography color="white">
+                                                            Transaksi
+                                                        </Typography>
+                                                    </ListItem>
+                                                </List>
+                                            </AccordionBody>
+                                        </Accordion>
+                                        <Accordion
+                                            open={open === 5}
+                                            icon={
+                                                <ChevronDownIcon
+                                                    color="white"
+                                                    strokeWidth={2.5}
+                                                    className={`mx-auto h-4 w-4 transition-transform ${
+                                                        open === 5
+                                                            ? "rotate-180"
+                                                            : ""
+                                                    }`}
+                                                />
+                                            }
+                                        >
+                                            <ListItem
+                                                className="p-0"
+                                                selected={open === 5}
+                                            >
+                                                <AccordionHeader
+                                                    onClick={() =>
+                                                        handleOpen(5)
+                                                    }
+                                                    className="border-b-0 p-3"
+                                                >
+                                                    <ListItemPrefix>
+                                                        <ShoppingBagIcon
+                                                            className="h-5 w-5"
+                                                            color="white"
                                                         />
-                                                        <polyline points="7 8 3 12 7 16" />
-                                                        <polyline points="17 8 21 12 17 16" />
-                                                        <line
-                                                            x1={14}
-                                                            y1={4}
-                                                            x2={10}
-                                                            y2={20}
-                                                        />
-                                                    </svg>
-                                                </div>
-                                                <span className="ml-2 xl:text-base md:text-2xl text-base">
-                                                    Menu Market Place
-                                                </span>
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link className="pl-6 text-white text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex items-center">
-                                                <div className="w-6 h-6 md:w-8 md:h-8">
-                                                    <svg
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        className="icon icon-tabler icon-tabler-code"
-                                                        viewBox="0 0 24 24"
-                                                        strokeWidth="1.5"
-                                                        stroke="currentColor"
-                                                        fill="none"
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
+                                                    </ListItemPrefix>
+                                                    <Typography
+                                                        color="white"
+                                                        className="mr-auto font-normal"
                                                     >
-                                                        <path
-                                                            stroke="none"
-                                                            d="M0 0h24v24H0z"
+                                                        Menu Ijin
+                                                    </Typography>
+                                                </AccordionHeader>
+                                            </ListItem>
+                                            <AccordionBody className="py-1">
+                                                <List className="p-0">
+                                                    <ListItem>
+                                                        <ListItemPrefix>
+                                                            <ChevronRightIcon
+                                                                strokeWidth={3}
+                                                                className="h-3 w-5"
+                                                                color="white"
+                                                            />
+                                                        </ListItemPrefix>
+                                                        <Typography color="white">
+                                                            Pergantian Lokasi
+                                                            Penyedia
+                                                        </Typography>
+                                                    </ListItem>
+                                                    <ListItem>
+                                                        <ListItemPrefix>
+                                                            <ChevronRightIcon
+                                                                strokeWidth={3}
+                                                                className="h-3 w-5"
+                                                                color="white"
+                                                            />
+                                                        </ListItemPrefix>
+                                                        <Typography color="white">
+                                                            Verifikasi
+                                                        </Typography>
+                                                    </ListItem>
+                                                    <ListItem>
+                                                        <ListItemPrefix>
+                                                            <ChevronRightIcon
+                                                                strokeWidth={3}
+                                                                className="h-3 w-5"
+                                                                color="white"
+                                                            />
+                                                        </ListItemPrefix>
+                                                        <Typography color="white">
+                                                            Pengaduan Penyedia
+                                                            Layanan
+                                                        </Typography>
+                                                    </ListItem>
+                                                    <ListItem>
+                                                        <ListItemPrefix>
+                                                            <ChevronRightIcon
+                                                                strokeWidth={3}
+                                                                className="h-3 w-5"
+                                                                color="white"
+                                                            />
+                                                        </ListItemPrefix>
+                                                        <Typography color="white">
+                                                            Ikut Iklan
+                                                        </Typography>
+                                                    </ListItem>
+                                                </List>
+                                            </AccordionBody>
+                                        </Accordion>
+                                        <Accordion
+                                            open={open === 6}
+                                            icon={
+                                                <ChevronDownIcon
+                                                    color="white"
+                                                    strokeWidth={2.5}
+                                                    className={`mx-auto h-4 w-4 transition-transform ${
+                                                        open === 6
+                                                            ? "rotate-180"
+                                                            : ""
+                                                    }`}
+                                                />
+                                            }
+                                        >
+                                            <ListItem
+                                                className="p-0"
+                                                selected={open === 6}
+                                            >
+                                                <AccordionHeader
+                                                    onClick={() =>
+                                                        handleOpen(6)
+                                                    }
+                                                    className="border-b-0 p-3"
+                                                >
+                                                    <ListItemPrefix>
+                                                        <ShoppingBagIcon
+                                                            className="h-5 w-5"
+                                                            color="white"
                                                         />
-                                                        <polyline points="7 8 3 12 7 16" />
-                                                        <polyline points="17 8 21 12 17 16" />
-                                                        <line
-                                                            x1={14}
-                                                            y1={4}
-                                                            x2={10}
-                                                            y2={20}
-                                                        />
-                                                    </svg>
-                                                </div>
-                                                <span className="ml-2 xl:text-base md:text-2xl text-base">
-                                                    Pengaturan
-                                                </span>
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link className="pl-6 text-white text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex items-center">
-                                                <div className="w-6 h-6 md:w-8 md:h-8">
-                                                    <svg
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        className="icon icon-tabler icon-tabler-code"
-                                                        viewBox="0 0 24 24"
-                                                        strokeWidth="1.5"
-                                                        stroke="currentColor"
-                                                        fill="none"
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
+                                                    </ListItemPrefix>
+                                                    <Typography
+                                                        color="white"
+                                                        className="mr-auto font-normal"
                                                     >
-                                                        <path
-                                                            stroke="none"
-                                                            d="M0 0h24v24H0z"
-                                                        />
-                                                        <polyline points="7 8 3 12 7 16" />
-                                                        <polyline points="17 8 21 12 17 16" />
-                                                        <line
-                                                            x1={14}
-                                                            y1={4}
-                                                            x2={10}
-                                                            y2={20}
-                                                        />
-                                                    </svg>
-                                                </div>
-                                                <span className="ml-2 xl:text-base md:text-2xl text-base">
-                                                    Logout
-                                                </span>
-                                            </Link>
-                                        </li>
-                                    </ul>
+                                                        Menu Utils
+                                                    </Typography>
+                                                </AccordionHeader>
+                                            </ListItem>
+                                            <AccordionBody className="py-1">
+                                                <List className="p-0">
+                                                    <ListItem>
+                                                        <ListItemPrefix>
+                                                            <ChevronRightIcon
+                                                                strokeWidth={3}
+                                                                className="h-3 w-5"
+                                                                color="white"
+                                                            />
+                                                        </ListItemPrefix>
+                                                        <Typography color="white">
+                                                            Pengaturan
+                                                        </Typography>
+                                                    </ListItem>
+                                                    <ListItem>
+                                                        <ListItemPrefix>
+                                                            <ChevronRightIcon
+                                                                strokeWidth={3}
+                                                                className="h-3 w-5"
+                                                                color="white"
+                                                            />
+                                                        </ListItemPrefix>
+                                                        <Typography color="white">
+                                                            Laporan
+                                                        </Typography>
+                                                    </ListItem>
+                                                    <ListItem>
+                                                        <ListItemPrefix>
+                                                            <ChevronRightIcon
+                                                                strokeWidth={3}
+                                                                className="h-3 w-5"
+                                                                color="white"
+                                                            />
+                                                        </ListItemPrefix>
+                                                        <Typography color="white">
+                                                            Integrasi
+                                                        </Typography>
+                                                    </ListItem>
+                                                    <ListItem>
+                                                        <ListItemPrefix>
+                                                            <ChevronRightIcon
+                                                                strokeWidth={3}
+                                                                className="h-3 w-5"
+                                                                color="white"
+                                                            />
+                                                        </ListItemPrefix>
+                                                        <Typography color="white">
+                                                            Dompet
+                                                        </Typography>
+                                                    </ListItem>
+                                                </List>
+                                            </AccordionBody>
+                                        </Accordion>
+                                        <ListItem>
+                                            <ListItemPrefix>
+                                                <InboxIcon
+                                                    className="h-5 w-5"
+                                                    color="white"
+                                                />
+                                            </ListItemPrefix>
+                                            <Typography color="white">
+                                                Logout
+                                            </Typography>
+                                        </ListItem>
+                                    </List>
                                 </div>
                                 <div className="w-full">
                                     <div className="flex justify-center mb-4 w-full px-6">
@@ -1061,6 +1385,7 @@ export default function Content(props) {
                                                                 href={route(
                                                                     "profile.edit"
                                                                 )}
+                                                                
                                                                 className="flex items-center"
                                                             >
                                                                 <svg
@@ -1196,7 +1521,7 @@ export default function Content(props) {
                         {/* Navigation ends */}
                         {/* Remove class [ h-64 ] when adding a card block */}
                         <div className="container mx-auto py-10 md:w-4/5 w-11/12 px-6">
-                            {props.children}
+                            {children}
                         </div>
                     </div>
                 </div>

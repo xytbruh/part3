@@ -2,13 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Jobs\ProductJob;
-use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use File;
-use Inertia\Inertia;
 
 class ProductController extends Controller
 {
@@ -19,10 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $product = Product::with('category')->when(request()->q, function ($products) {
-            $products = $products->where('title', 'like', '%' . request()->q . '%');
-        })->orderBy('id', 'DESC')->paginate(5); 
-        return Inertia::render('pageAdmin/menuMarketPlace/produk/Produk', compact('product'));
+        //
     }
 
     /**
@@ -32,9 +24,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //QUERY UNTUK MENGAMBIL SEMUA DATA CATEGORY
-        $category = Category::all();
-        return Inertia::render('pageAdmin/MenuMarketPlace', compact('category'));
+        //
     }
 
     /**
@@ -45,45 +35,16 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $this->validate($request, [
-            'name' => 'required|string|max:100',
-            'description' => 'required',
-            'category_id' => 'required|exists:categories,id', 
-            'price' => 'required|integer',
-            'weight' => 'required|integer',
-            'image' => 'required|image|mimes:png,jpeg,jpg' 
-        ]);
-
-        //JIKA FILENYA ADA
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-
-            $filename = time() . Str::slug($request->name) . '.' . $file->getClientOriginalExtension();
-            $file->storeAs('public/products', $filename);
-
-            $product = Product::create([
-                'name' => $request->name,
-                'slug' => $request->name,
-                'category_id' => $request->category_id,
-                'description' => $request->description,
-                'image' => $filename, 
-                'price' => $request->price,
-                'weight' => $request->weight,
-                'status' => $request->status
-            ]);
-
-            return redirect()->back()->with('message', 'Product berhasil dibuat');
-        }
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Product $product)
     {
         //
     }
@@ -91,97 +52,34 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-        $product = Product::find($id); 
-        $category = Category::orderBy('name', 'DESC')->get(); 
-        return Inertia::render('pageAdmin/menuMarketPlace/ProdukEdit', compact('product','category'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Product $product)
     {
-        $this->validate($request, [
-            'name' => 'required|string|max:100',
-            'description' => 'required',
-            'category_id' => 'required|exists:categories,id',
-            'price' => 'required|integer',
-            'weight' => 'required|integer',
-            'image' => 'nullable|image|mimes:png,jpeg,jpg' //IMAGE BISA NULLABLE
-        ]);
-
-        $product = Product::find($id);
-        $filename = $product->image;
-    
-        //JIKA ADA FILE GAMBAR YANG DIKIRIM
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $filename = time() . Str::slug($request->name) . '.' . $file->getClientOriginalExtension();
-            
-            $file->storeAs('public/products', $filename);
-
-            File::delete(storage_path('app/public/products/' . $product->image));
-        }
-
-        $product->update([
-            'name' => $request->name,
-            'slug' => $request->name,
-            'description' => $request->description,
-            'category_id' => $request->category_id,
-            'price' => $request->price,
-            'weight' => $request->weight,
-            'image' => $filename,
-            'status' => $request->status
-        ]);
-        return to_route('menu.marketplace')->with("message", "kategori berhasil diubah");
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        $product = Product::find($id); 
-        File::delete(storage_path('app/public/products/' . $product->image));
-        $product->delete();
-        return redirect()->back()->with('message', 'Product berhasil dihapus');
-    }
-
-    public function massUploadForm()
-    {
-        $category = Category::orderBy('name', 'DESC')->get();
-        return view('products.bulk', compact('category'));
-    }
-
-    public function massUpload(Request $request)
-    {
-        $this->validate($request, [
-            'category_id' => 'required|exists:categories,id',
-            'file' => 'required|mimes:xlsx' 
-        ]);
-
-        if ($request->hasFile('file')) {
-            $file = $request->file('file');
-            $filename = time() . '-product.' . $file->getClientOriginalExtension();
-            $file->storeAs('public/uploads', $filename); 
-
-            //BUAT JADWAL UNTUK PROSES FILE TERSEBUT DENGAN MENGGUNAKAN JOB
-            //ADAPUN PADA DISPATCH KITA MENGIRIMKAN DUA PARAMETER SEBAGAI INFORMASI
-            //YAKNI KATEGORI ID DAN NAMA FILENYA YANG SUDAH DISIMPAN
-            ProductJob::dispatch($request->category_id, $filename);
-            return redirect()->back()->with(['success' => 'Upload Produk Dijadwalkan']);
-        }
+        //
     }
 }
