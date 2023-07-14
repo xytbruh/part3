@@ -41,7 +41,7 @@ export default function Welcome({ auth, category }) {
                                         alt=""
                                     />
                                     <span className="text-xs lg:text-base text-blue-gray-800">
-                                        {kategori.title}
+                                        {kategori.name}
                                     </span>
                                 </Link>
                             </div>

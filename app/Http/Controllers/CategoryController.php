@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\CategoryCollection;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+
 use Inertia\Inertia;
 
 class CategoryController extends Controller
@@ -18,10 +18,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category = Category::with(['parent'])->orderBy('created_at', 'ASC')->paginate(10);
-        $parent = Category::getParent()->orderBy('name', 'ASC')->get();
-
-        return Inertia::render('pageAdmin/MenuMarketPlace', compact('category', 'parent'));
+        $category = Category::orderBy('created_at', 'desc')->get();
+        return Inertia::render('pageAdmin/menuMarketPlace/Kategori', ['category' => $category]);
         
     }
 
@@ -32,7 +30,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('pageAdmin/menuMarketPlace/Kategori');
+
     }
 
     /**
@@ -44,11 +43,18 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|string|max:50|unique:categories'
+            'name' => 'required|string|max:50|unique:categories',
+            'image' => 'required',
         ]);
+        $file = $request->file('image');
+        $path = time() . '_' . $request->name . '.' . $file->getClientOriginalExtension();
 
-        $request->request->add(['slug' => $request->name]);
-        Category::create($request->except('_token'));
+        Storage::disk('local')->put('public/' . $path, file_get_contents($file));
+        Category::create([
+                'name' => $request->name,
+                'image' => $path,
+                'slug' => Str::slug($request->name, '-'),
+            ]); 
         return redirect()->back()->with('message', 'kategori berhasil dibuat');
     }
 
@@ -58,23 +64,19 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Category $category)
     {
-        //
+        $category = Category::get()->all();
+        return Inertia::render("Welcome", ["category" => $category]);
     }
-
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        $category = Category::find($id); 
-        $parent = Category::getParent()->orderBy('name', 'ASC')->get(); 
-        return Inertia::render('pageAdmin/menuMarketPlace/KategoriEdit', compact('category', 'parent'));
-
+    public function edit(Category $category, Request $request)
+    {   
     }
 
     /**
@@ -84,21 +86,20 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
-        $this->validate($request, [
-            'name' => 'required|string|max:50|unique:categories,name,' . $id
-        ]);
-
-        $category = Category::find($id); 
-        $category->update([
+        $file = $request->file('image');
+        $path = time() . '_' . $request->name . '.' . $file->getClientOriginalExtension();
+        
+        Storage::disk('local')->put('public/' . $path, file_get_contents($file));
+        $category->where($request->id)->update([
             'name' => $request->name,
-            'slug' => $request->name,
-            'parent_id' => $request->parent_id
+            'image' => $path,
+            'slug' => Str::slug($request->name, '-')
         ]);
-
-        return to_route('menu.marketplace')->with("message", "kategori berhasil diubah");
-        }
+        
+    return to_route('kategori')->with("message", "kategori berhasil diubah");
+    }
 
     /**
      * Remove the specified resource from storage.

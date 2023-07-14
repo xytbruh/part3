@@ -2,9 +2,12 @@ import AddCategory from "@/utils/AddCategory";
 import { Link } from "@inertiajs/react";
 import { Card } from "@material-tailwind/react";
 import React from "react";
+import Content from "../Layouts/Content";
+import EditKategori from "@/utils/EditKategori";
 
 export default function Kategori({ category }) {
-    const TABLE_HEAD_CATEGORY = ["No", "Kategori", "Parent", "Created At"];
+    console.log(category);
+    const TABLE_HEAD_CATEGORY = ["No", "Kategori", "Image", "Slug"];
     return (
         <Card className="overflow-scroll h-full w-full">
             <table className="w-full min-w-max table-auto text-left">
@@ -30,13 +33,13 @@ export default function Kategori({ category }) {
                                 color="blue-gray"
                                 className="font-normal leading-none opacity-70"
                             >
-                                <AddCategory category={category.data} />
+                                <AddCategory category={category} />
                             </div>
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    {category.data.map((category, index) => {
+                    {category.map((category, index) => {
                         const isLast = index === category.length - 1;
                         const classes = isLast
                             ? "p-4"
@@ -53,6 +56,7 @@ export default function Kategori({ category }) {
                                         {index + 1}
                                     </div>
                                 </td>
+
                                 <td className={classes}>
                                     <div
                                         variant="small"
@@ -68,27 +72,29 @@ export default function Kategori({ category }) {
                                         color="blue-gray"
                                         className="font-normal text-sm"
                                     >
-                                        {category.parent}
+                                        <img
+                                            src={`/storage/${category.image}`}
+                                            width="50"
+                                            alt=""
+                                        />
                                     </div>
                                 </td>
-
                                 <td className={classes}>
                                     <div
                                         variant="small"
                                         color="blue-gray"
                                         className="font-normal text-sm"
                                     >
-                                        {category.created_at}
+                                        {category.slug}
                                     </div>
                                 </td>
 
-                                <td className={classes}>
-                                    <Link
-                                        href={route("edit.kategori", category.id)}
-                                        as="button"
-                                    >
-                                        Edit
-                                    </Link>
+                                <td
+                                    className={classes}
+                                    style={{ display: "flex" }}
+                                >
+                                    <EditKategori category={category} />
+
                                     <Link
                                         href={route("delete.kategori")}
                                         method="post"
@@ -110,3 +116,4 @@ export default function Kategori({ category }) {
         </Card>
     );
 }
+Kategori.layout = (page) => <Content children={page} />;

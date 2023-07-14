@@ -2,9 +2,10 @@ import AddProduct from "@/utils/AddProduct";
 import { Link } from "@inertiajs/react";
 import { Card } from "@material-tailwind/react";
 import React from "react";
+import Content from "../../Layouts/Content";
 
-export default function Produk({ product }) {
-    console.log(product)
+export default function Produk(props) {
+    console.log(props)
     const TABLE_HEAD_PRODUCT = ["No", "Kategori", "Parent", "Created At"];
     return (
         <Card className="overflow-scroll h-full w-full">
@@ -111,3 +112,4 @@ export default function Produk({ product }) {
         </Card>
     );
 }
+Product.layout = (page) => <Content children={page} />;

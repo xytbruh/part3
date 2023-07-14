@@ -27,7 +27,7 @@ use Inertia\Inertia;
 //     ],);
 // });
 
-Route::get('/', [CategoryController::class, 'index'] );
+Route::get('/', [CategoryController::class, 'show'] );
 Route::get('/kategori/{id}', function() {
     return Inertia::render("Kategori");
 })->name("kategori.detail");
@@ -40,44 +40,21 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified']], functi
         return Inertia::render('pageAdmin/Dashboard');
     })->name('dashboard');
     
-    Route::get('menu-master', function () {
-        return Inertia::render('pageAdmin/MenuMaster');
-    })->name('menu.master');
     
-    // menu profil
-    Route::get('menu-profil', function () {
-        return Inertia::render('pageAdmin/MenuProfil');
-    })->name('menu.profil');
-    
-    
-    //  menu layanan
-    Route::get('menu-layanan', function () {
-        return Inertia::render('pageAdmin/MenuLayanan');
-    })->name('menu.layanan');
-    
-    Route::get('menu-ijin', function () {
-        return Inertia::render('pageAdmin/MenuIjin');
-    })->name('menu.ijin');
-    
-    // pengaturan
-    Route::get('pengaturan', function () {
-        return Inertia::render('pageAdmin/Pengaturan');
-    })->name('pengaturan');
-
-    // Route::get('menu-marketplace', [ProductController::class, 'store' ]); 
-    // Route::get('menu-marketplace', [ProductController::class, 'index' ])->name('menu-marketplace'); 
-    // Route::get('menu-marketplace/edit/{product}', [ProductController::class, 'edit' ])->name('edit.produk'); 
-    // Route::get('menu-marketplace/update/{product}', [ProductController::class, 'update' ]); 
-    // Route::get('menu-marketplace/delete', [ProductController::class, 'destroy' ])->name("delete.produk"); 
+    Route::get('produk', [ProductController::class, 'store' ]); 
+    Route::get('produk', [ProductController::class, 'index' ])->name('produk'); 
+    Route::get('produk/edit/{product}', [ProductController::class, 'edit' ])->name('edit.produk'); 
+    Route::get('produk/update/{product}', [ProductController::class, 'update' ]); 
+    Route::get('produk/delete', [ProductController::class, 'destroy' ])->name("delete.produk"); 
     // Route::get('/product/bulk', [ProductController::class, 'massUploadForm'])->name('product.bulk'); 
     // Route::post('/product/bulk', [ProductController::class, 'massUpload'])->name('product.saveBulk');
 
 
-    Route::post('menu-marketplace', [CategoryController::class, 'store'] );
-    Route::get('menu-marketplace', [CategoryController::class, 'index'] )->name('menu.marketplace');
-    Route::get('menu-marketplace/edit/{category} ', [CategoryController::class, 'edit'] )->name('edit.kategori');
-    Route::put('menu-marketplace/update/{category}', [CategoryController::class, 'update'] );
-    Route::post('menu-marketplace/delete', [CategoryController::class, 'destroy'] )->name('delete.kategori');
+    Route::post('/kategori', [CategoryController::class, 'store'] );
+    Route::get('/kategori', [CategoryController::class, 'index'] )->name('kategori');
+    Route::get('/kategori/edit ', [CategoryController::class, 'edit'] )->name('edit.kategori');
+    Route::post('/kategori/update', [CategoryController::class, 'update'] )->name("update.kategori");
+    Route::post('/kategori/delete', [CategoryController::class, 'destroy'] )->name('delete.kategori');
 });
 
 // menu master

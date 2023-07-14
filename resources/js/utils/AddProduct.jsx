@@ -25,7 +25,7 @@ export default function AddProduct({ product }) {
         formData.append("name", name);
         formData.append("parent", parent);
 
-        router.post("/admin/menu-marketplace", formData);
+        router.post("/admin/kategori", formData);
         setOpen(false);
     };
     return (

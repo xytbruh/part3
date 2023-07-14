@@ -41,9 +41,8 @@ import { Head, Link } from "@inertiajs/react";
 import Kategori from "./menuMarketPlace/Kategori";
 import Produk from "./menuMarketPlace/Produk";
 
-
 export default function MenuMarketPlace(props) {
-    console.log(props)
+    console.log(props);
 
     return (
         <>
@@ -56,7 +55,7 @@ export default function MenuMarketPlace(props) {
                 </TabsHeader>
                 <TabsBody>
                     <TabPanel value="produk">
-                        <Produk product={props.product}/>
+                        <Produk product={props.product} />
                     </TabPanel>
                     <TabPanel value="kategori">
                         <Kategori category={props.category} />
