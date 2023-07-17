@@ -3,7 +3,6 @@ import LogoPart from "@/img/LogoPartLivinDark.png";
 
 export default function Header() {
     return (
-        <div className="bg-gray-800">
             <div className="navbar bg-primary container mx-auto">
                 <div className="flex-1">
                     <img src={LogoPart} alt="" />
@@ -26,6 +25,5 @@ export default function Header() {
                     </button>
                 </div>
             </div>
-        </div>
     );
 }

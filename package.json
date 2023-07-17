@@ -23,6 +23,7 @@
         "@heroicons/react": "^2.0.18",
         "@material-tailwind/react": "^2.0.5",
         "@preline/overlay": "^1.4.0",
+        "@splidejs/react-splide": "^0.7.12",
         "chart.js": "^4.3.0",
         "chartjs-adapter-moment": "^1.0.1",
         "daisyui": "^3.1.7",

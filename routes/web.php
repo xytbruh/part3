@@ -31,7 +31,9 @@ Route::get('/', [CategoryController::class, 'show'] );
 Route::get('/kategori/{id}', function() {
     return Inertia::render("Kategori");
 })->name("kategori.detail");
-
+Route::get('/produk', function() {
+    return Inertia::render("Produk");
+})->name("produk");
 
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified']], function() {
@@ -41,11 +43,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified']], functi
     })->name('dashboard');
     
     
-    Route::get('produk', [ProductController::class, 'store' ]); 
-    Route::get('produk', [ProductController::class, 'index' ])->name('produk'); 
-    Route::get('produk/edit/{product}', [ProductController::class, 'edit' ])->name('edit.produk'); 
-    Route::get('produk/update/{product}', [ProductController::class, 'update' ]); 
-    Route::get('produk/delete', [ProductController::class, 'destroy' ])->name("delete.produk"); 
+    // Route::get('produk', [ProductController::class, 'store' ]); 
+    // Route::get('produk', [ProductController::class, 'index' ])->name('produk'); 
+    // Route::get('produk/edit/{product}', [ProductController::class, 'edit' ])->name('edit.produk'); 
+    // Route::get('produk/update/{product}', [ProductController::class, 'update' ]); 
+    // Route::get('produk/delete', [ProductController::class, 'destroy' ])->name("delete.produk"); 
     // Route::get('/product/bulk', [ProductController::class, 'massUploadForm'])->name('product.bulk'); 
     // Route::post('/product/bulk', [ProductController::class, 'massUpload'])->name('product.saveBulk');
 
