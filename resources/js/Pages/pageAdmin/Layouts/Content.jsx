@@ -13,13 +13,18 @@ import {
 } from "@material-tailwind/react";
 import {
     PresentationChartBarIcon,
-    ShoppingBagIcon,
     UserCircleIcon,
     InboxIcon,
+    UserGroupIcon,
+    ClipboardDocumentListIcon,
+    ShoppingCartIcon,
+    PencilSquareIcon,
+    Cog6ToothIcon,
+    PowerIcon,
 } from "@heroicons/react/24/solid";
 import { ChevronRightIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
 
-export default function Content({children}) {
+export default function Content({ children }) {
     const [open, setOpen] = useState(0);
 
     const handleOpen = (value) => {
@@ -90,18 +95,20 @@ export default function Content({children}) {
                                 </ListItem>
                                 <AccordionBody className="py-1">
                                     <List className="p-0">
-                                        <ListItem>
-                                            <ListItemPrefix>
-                                                <ChevronRightIcon
-                                                    strokeWidth={3}
-                                                    className="h-3 w-5"
-                                                    color="white"
-                                                />
-                                            </ListItemPrefix>
-                                            <Typography color="white">
-                                                User
-                                            </Typography>
-                                        </ListItem>
+                                        <Link href={route("user")}>
+                                            <ListItem>
+                                                <ListItemPrefix>
+                                                    <ChevronRightIcon
+                                                        strokeWidth={3}
+                                                        className="h-3 w-5"
+                                                        color="white"
+                                                    />
+                                                </ListItemPrefix>
+                                                <Typography color="white">
+                                                    User
+                                                </Typography>
+                                            </ListItem>
+                                        </Link>
                                         <ListItem>
                                             <ListItemPrefix>
                                                 <ChevronRightIcon
@@ -147,7 +154,7 @@ export default function Content({children}) {
                                         className="border-b-0 p-3"
                                     >
                                         <ListItemPrefix>
-                                            <ShoppingBagIcon
+                                            <UserGroupIcon
                                                 className="h-5 w-5"
                                                 color="white"
                                             />
@@ -231,7 +238,7 @@ export default function Content({children}) {
                                         className="border-b-0 p-3"
                                     >
                                         <ListItemPrefix>
-                                            <ShoppingBagIcon
+                                            <ClipboardDocumentListIcon
                                                 className="h-5 w-5"
                                                 color="white"
                                             />
@@ -315,7 +322,7 @@ export default function Content({children}) {
                                         className="border-b-0 p-3"
                                     >
                                         <ListItemPrefix>
-                                            <ShoppingBagIcon
+                                            <ShoppingCartIcon
                                                 className="h-5 w-5"
                                                 color="white"
                                             />
@@ -330,34 +337,34 @@ export default function Content({children}) {
                                 </ListItem>
                                 <AccordionBody className="py-1">
                                     <List className="p-0">
-                                        <ListItem>
-                                            <ListItemPrefix>
-                                                <ChevronRightIcon
-                                                    strokeWidth={3}
-                                                    className="h-3 w-5"
-                                                    color="white"
-                                                />
-                                            </ListItemPrefix>
-                                            <Link href={route("produk")}>
+                                        <Link href={route("produk")}>
+                                            <ListItem>
+                                                <ListItemPrefix>
+                                                    <ChevronRightIcon
+                                                        strokeWidth={3}
+                                                        className="h-3 w-5"
+                                                        color="white"
+                                                    />
+                                                </ListItemPrefix>
                                                 <Typography color="white">
                                                     Produk
                                                 </Typography>
-                                            </Link>
-                                        </ListItem>
-                                        <ListItem>
-                                            <ListItemPrefix>
-                                                <ChevronRightIcon
-                                                    strokeWidth={3}
-                                                    className="h-3 w-5"
-                                                    color="white"
-                                                />
-                                            </ListItemPrefix>
-                                            <Link href={route("kategori")}>
+                                            </ListItem>
+                                        </Link>
+                                        <Link href={route("kategori")}>
+                                            <ListItem>
+                                                <ListItemPrefix>
+                                                    <ChevronRightIcon
+                                                        strokeWidth={3}
+                                                        className="h-3 w-5"
+                                                        color="white"
+                                                    />
+                                                </ListItemPrefix>
                                                 <Typography color="white">
                                                     Kategori
                                                 </Typography>
-                                            </Link>
-                                        </ListItem>
+                                            </ListItem>
+                                        </Link>
                                         <ListItem>
                                             <ListItemPrefix>
                                                 <ChevronRightIcon
@@ -391,7 +398,7 @@ export default function Content({children}) {
                                         className="border-b-0 p-3"
                                     >
                                         <ListItemPrefix>
-                                            <ShoppingBagIcon
+                                            <PencilSquareIcon
                                                 className="h-5 w-5"
                                                 color="white"
                                             />
@@ -475,7 +482,7 @@ export default function Content({children}) {
                                         className="border-b-0 p-3"
                                     >
                                         <ListItemPrefix>
-                                            <ShoppingBagIcon
+                                            <Cog6ToothIcon
                                                 className="h-5 w-5"
                                                 color="white"
                                             />
@@ -541,15 +548,23 @@ export default function Content({children}) {
                                     </List>
                                 </AccordionBody>
                             </Accordion>
-                            <ListItem>
-                                <ListItemPrefix>
-                                    <InboxIcon
-                                        className="h-5 w-5"
-                                        color="white"
-                                    />
-                                </ListItemPrefix>
-                                <Typography color="white">Logout</Typography>
-                            </ListItem>
+                            <Link
+                                href={route("logout")}
+                                as="button"
+                                method="post"
+                            >
+                                <ListItem>
+                                    <ListItemPrefix>
+                                        <PowerIcon
+                                            className="h-5 w-5"
+                                            color="white"
+                                        />
+                                    </ListItemPrefix>
+                                    <Typography color="white">
+                                        Logout
+                                    </Typography>
+                                </ListItem>
+                            </Link>
                         </List>
                     </div>
                     {/*Mobile responsive sidebar*/}
@@ -738,7 +753,7 @@ export default function Content({children}) {
                                                     className="border-b-0 p-3"
                                                 >
                                                     <ListItemPrefix>
-                                                        <ShoppingBagIcon
+                                                        <UserGroupIcon
                                                             className="h-5 w-5"
                                                             color="white"
                                                         />
@@ -829,7 +844,7 @@ export default function Content({children}) {
                                                     className="border-b-0 p-3"
                                                 >
                                                     <ListItemPrefix>
-                                                        <ShoppingBagIcon
+                                                        <UserGroupIcon
                                                             className="h-5 w-5"
                                                             color="white"
                                                         />
@@ -920,7 +935,7 @@ export default function Content({children}) {
                                                     className="border-b-0 p-3"
                                                 >
                                                     <ListItemPrefix>
-                                                        <ShoppingBagIcon
+                                                        <UserGroupIcon
                                                             className="h-5 w-5"
                                                             color="white"
                                                         />
@@ -1011,7 +1026,7 @@ export default function Content({children}) {
                                                     className="border-b-0 p-3"
                                                 >
                                                     <ListItemPrefix>
-                                                        <ShoppingBagIcon
+                                                        <UserGroupIcon
                                                             className="h-5 w-5"
                                                             color="white"
                                                         />
@@ -1104,7 +1119,7 @@ export default function Content({children}) {
                                                     className="border-b-0 p-3"
                                                 >
                                                     <ListItemPrefix>
-                                                        <ShoppingBagIcon
+                                                        <UserGroupIcon
                                                             className="h-5 w-5"
                                                             color="white"
                                                         />
@@ -1385,7 +1400,6 @@ export default function Content({children}) {
                                                                 href={route(
                                                                     "profile.edit"
                                                                 )}
-                                                                
                                                                 className="flex items-center"
                                                             >
                                                                 <svg

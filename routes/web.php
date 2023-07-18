@@ -27,22 +27,26 @@ use Inertia\Inertia;
 //     ],);
 // });
 
-Route::get('/', [CategoryController::class, 'show'] );
-Route::get('/kategori/{id}', function() {
+Route::get('/', [CategoryController::class, 'show']);
+Route::get('/kategori/{id}', function () {
     return Inertia::render("Kategori");
 })->name("kategori.detail");
-Route::get('/produk', function() {
+Route::get('/produk', function () {
     return Inertia::render("Produk");
 })->name("produk");
 
 
-Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified']], function() {
-    
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified']], function () {
+
     Route::get('/', function () {
         return Inertia::render('pageAdmin/Dashboard');
     })->name('dashboard');
-    
-    
+
+    Route::get('user', [ProfileController::class, 'show'])->name('user');
+    Route::post('/user', [ProfileController::class, 'store']);
+    Route::post('/user/delete', [ProfileController::class, 'delete'])->name('delete.user');
+
+
     // Route::get('produk', [ProductController::class, 'store' ]); 
     // Route::get('produk', [ProductController::class, 'index' ])->name('produk'); 
     // Route::get('produk/edit/{product}', [ProductController::class, 'edit' ])->name('edit.produk'); 
@@ -52,11 +56,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified']], functi
     // Route::post('/product/bulk', [ProductController::class, 'massUpload'])->name('product.saveBulk');
 
 
-    Route::post('/kategori', [CategoryController::class, 'store'] );
-    Route::get('/kategori', [CategoryController::class, 'index'] )->name('kategori');
-    Route::get('/kategori/edit ', [CategoryController::class, 'edit'] )->name('edit.kategori');
-    Route::post('/kategori/update', [CategoryController::class, 'update'] )->name("update.kategori");
-    Route::post('/kategori/delete', [CategoryController::class, 'destroy'] )->name('delete.kategori');
+    Route::post('/kategori', [CategoryController::class, 'store']);
+    Route::get('/kategori', [CategoryController::class, 'index'])->name('kategori');
+    Route::get('/kategori/edit ', [CategoryController::class, 'edit'])->name('edit.kategori');
+    Route::post('/kategori/update', [CategoryController::class, 'update'])->name("update.kategori");
+    Route::post('/kategori/delete', [CategoryController::class, 'destroy'])->name('delete.kategori');
 });
 
 // menu master
@@ -66,7 +70,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified']], functi
 
 
 Route::middleware('verified')->group(function () {
-
 });
 
 
@@ -79,4 +82,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

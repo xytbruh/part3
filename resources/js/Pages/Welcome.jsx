@@ -40,7 +40,7 @@ export default function Welcome({ auth, category }) {
                             referrerPolicy="no-referrer-when-downgrade"
                         ></iframe>
                     </div>
-                    <div className="grid grid-cols-3 lg:grid-cols-6 gap-5">
+                    <div className="grid grid-cols-3 lg:grid-cols-6 gap-5 py-5">
                         {kategori.map(({ nama, icon }, i) => (
                             <div
                                 key={i}
