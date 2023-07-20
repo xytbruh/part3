@@ -1,10 +1,10 @@
 import Footer from "@/Layouts/Footer";
 import Header from "@/Layouts/Header";
 import { Head, Link } from "@inertiajs/react";
-import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
-import React from "react";
-import contohImage from "@/img/LogoPartLivinDark.png";
+import React, { useState } from "react";
 export default function Produk() {
+    const [klikAlamat, setKlikAlamat] = useState("");
+
     return (
         <>
             <Head />
@@ -23,7 +23,7 @@ export default function Produk() {
                         referrerPolicy="no-referrer-when-downgrade"
                     ></iframe>
                 </div>
-                <div className="w-full h-auto bg-white shadow-2xl rounded-t-xl mt-[-50px] relative px-6 py-3 text-black">
+                <div className="w-full h-[40vh] bg-white shadow-2xl rounded-t-xl mt-[-50px] relative px-6 py-3 text-black">
                     <div className="flex justify-between">
                         <div>
                             <h1 className="h3 font-bold ">
@@ -37,27 +37,37 @@ export default function Produk() {
                         </div>
                     </div>
                     <p>Lorem ipsum dolor sit</p>
-                    <hr className="border-black mt-3" />
+                    <input
+                        type="text"
+                        defaultValue={klikAlamat}
+                        className="form-control mx-auto w-full"
+                        readOnly
+                    />
+                    <hr className="border-black my-3" />
                     <div
                         className="bg-green-100 overflow-hidden "
                         style={{ height: "10vh" }}
                     >
-                        <Splide
-                            aria-label="My Favorite Images"
-                            options={{
-                                arrows: false,
-                                direction: "ttb",
-                                height: "10rem",
-                                wheel: true,
-                                perPage: 1,
-                            }}
-                        >
-                            <SplideTrack>
-                                <SplideSlide>
-                                    <img src={contohImage} alt="Image 1" />
-                                </SplideSlide>
-                            </SplideTrack>
-                        </Splide>
+                        <div className="h-16 w-full carousel carousel-vertical  rounded-box">
+                            <div
+                                onClick={() => setKlikAlamat("Majalengka")}
+                                className="carousel-item h-full cursor-pointer justify-center items-center mx-auto text-center"
+                            >
+                                <div>
+                                    <h1>Majalengka</h1>
+                                    <p>Lorem, ipsum dolor sit amet csadsad</p>
+                                </div>
+                            </div>
+                            <div
+                                onClick={() => setKlikAlamat("Kadipaten")}
+                                className="carousel-item h-full cursor-pointer justify-center items-center mx-auto text-center"
+                            >
+                                <div>
+                                    <h1>Kadipaten</h1>
+                                    <p>Lorem, ipsum dolor sit amet csadsad</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>

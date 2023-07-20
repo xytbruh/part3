@@ -47,22 +47,22 @@ export default function Content({ children }) {
                             />
                         </div>
                         <List>
-                            <ListItem>
-                                <ListItemPrefix>
-                                    <UserCircleIcon
-                                        className="h-5 w-5"
-                                        color="white"
-                                    />
-                                </ListItemPrefix>
-                                <Link href={route("dashboard")}>
+                            <Link href={route("dashboard")}>
+                                <ListItem>
+                                    <ListItemPrefix>
+                                        <UserCircleIcon
+                                            className="h-5 w-5"
+                                            color="white"
+                                        />
+                                    </ListItemPrefix>
                                     <Typography
                                         color="white"
                                         className="mr-auto font-normal"
                                     >
                                         Dashboard
                                     </Typography>
-                                </Link>
-                            </ListItem>
+                                </ListItem>
+                            </Link>
                             <Accordion
                                 open={open === 1}
                                 icon={
@@ -95,7 +95,7 @@ export default function Content({ children }) {
                                 </ListItem>
                                 <AccordionBody className="py-1">
                                     <List className="p-0">
-                                        <Link href={route("user")}>
+                                        <Link href={route("admin.user")}>
                                             <ListItem>
                                                 <ListItemPrefix>
                                                     <ChevronRightIcon
@@ -351,7 +351,7 @@ export default function Content({ children }) {
                                                 </Typography>
                                             </ListItem>
                                         </Link>
-                                        <Link href={route("kategori")}>
+                                        <Link href={route("admin.kategori")}>
                                             <ListItem>
                                                 <ListItemPrefix>
                                                     <ChevronRightIcon
@@ -634,22 +634,22 @@ export default function Content({ children }) {
                                         </div>
                                     </div>
                                     <List>
-                                        <ListItem>
-                                            <ListItemPrefix>
-                                                <UserCircleIcon
-                                                    className="h-5 w-5"
-                                                    color="white"
-                                                />
-                                            </ListItemPrefix>
-                                            <Link href={route("dashboard")}>
+                                        <Link href={route("dashboard")}>
+                                            <ListItem>
+                                                <ListItemPrefix>
+                                                    <UserCircleIcon
+                                                        className="h-5 w-5"
+                                                        color="white"
+                                                    />
+                                                </ListItemPrefix>
                                                 <Typography
                                                     color="white"
                                                     className="mr-auto font-normal"
                                                 >
                                                     Dashboard
                                                 </Typography>
-                                            </Link>
-                                        </ListItem>
+                                            </ListItem>
+                                        </Link>
                                         <Accordion
                                             open={open === 1}
                                             icon={
@@ -689,18 +689,26 @@ export default function Content({ children }) {
                                             </ListItem>
                                             <AccordionBody className="py-1">
                                                 <List className="p-0">
-                                                    <ListItem>
-                                                        <ListItemPrefix>
-                                                            <ChevronRightIcon
-                                                                strokeWidth={3}
-                                                                className="h-3 w-5"
-                                                                color="white"
-                                                            />
-                                                        </ListItemPrefix>
-                                                        <Typography color="white">
-                                                            User
-                                                        </Typography>
-                                                    </ListItem>
+                                                    <Link
+                                                        href={route(
+                                                            "admin.user"
+                                                        )}
+                                                    >
+                                                        <ListItem>
+                                                            <ListItemPrefix>
+                                                                <ChevronRightIcon
+                                                                    strokeWidth={
+                                                                        3
+                                                                    }
+                                                                    className="h-3 w-5"
+                                                                    color="white"
+                                                                />
+                                                            </ListItemPrefix>
+                                                            <Typography color="white">
+                                                                User
+                                                            </Typography>
+                                                        </ListItem>
+                                                    </Link>
                                                     <ListItem>
                                                         <ListItemPrefix>
                                                             <ChevronRightIcon
@@ -844,7 +852,7 @@ export default function Content({ children }) {
                                                     className="border-b-0 p-3"
                                                 >
                                                     <ListItemPrefix>
-                                                        <UserGroupIcon
+                                                        <ClipboardDocumentListIcon
                                                             className="h-5 w-5"
                                                             color="white"
                                                         />
@@ -935,7 +943,7 @@ export default function Content({ children }) {
                                                     className="border-b-0 p-3"
                                                 >
                                                     <ListItemPrefix>
-                                                        <UserGroupIcon
+                                                        <ShoppingCartIcon
                                                             className="h-5 w-5"
                                                             color="white"
                                                         />
@@ -950,42 +958,44 @@ export default function Content({ children }) {
                                             </ListItem>
                                             <AccordionBody className="py-1">
                                                 <List className="p-0">
-                                                    <ListItem>
-                                                        <ListItemPrefix>
-                                                            <ChevronRightIcon
-                                                                strokeWidth={3}
-                                                                className="h-3 w-5"
-                                                                color="white"
-                                                            />
-                                                        </ListItemPrefix>
-                                                        <Link
-                                                            href={route(
-                                                                "produk"
-                                                            )}
-                                                        >
+                                                    <Link
+                                                        href={route("produk")}
+                                                    >
+                                                        <ListItem>
+                                                            <ListItemPrefix>
+                                                                <ChevronRightIcon
+                                                                    strokeWidth={
+                                                                        3
+                                                                    }
+                                                                    className="h-3 w-5"
+                                                                    color="white"
+                                                                />
+                                                            </ListItemPrefix>
                                                             <Typography color="white">
                                                                 Produk
                                                             </Typography>
-                                                        </Link>
-                                                    </ListItem>
-                                                    <ListItem>
-                                                        <ListItemPrefix>
-                                                            <ChevronRightIcon
-                                                                strokeWidth={3}
-                                                                className="h-3 w-5"
-                                                                color="white"
-                                                            />
-                                                        </ListItemPrefix>
-                                                        <Link
-                                                            href={route(
-                                                                "kategori"
-                                                            )}
-                                                        >
+                                                        </ListItem>
+                                                    </Link>
+                                                    <Link
+                                                        href={route(
+                                                            "admin.kategori"
+                                                        )}
+                                                    >
+                                                        <ListItem>
+                                                            <ListItemPrefix>
+                                                                <ChevronRightIcon
+                                                                    strokeWidth={
+                                                                        3
+                                                                    }
+                                                                    className="h-3 w-5"
+                                                                    color="white"
+                                                                />
+                                                            </ListItemPrefix>
                                                             <Typography color="white">
                                                                 Kategori
                                                             </Typography>
-                                                        </Link>
-                                                    </ListItem>
+                                                        </ListItem>
+                                                    </Link>
                                                     <ListItem>
                                                         <ListItemPrefix>
                                                             <ChevronRightIcon
@@ -1026,7 +1036,7 @@ export default function Content({ children }) {
                                                     className="border-b-0 p-3"
                                                 >
                                                     <ListItemPrefix>
-                                                        <UserGroupIcon
+                                                        <PencilSquareIcon
                                                             className="h-5 w-5"
                                                             color="white"
                                                         />
@@ -1119,7 +1129,7 @@ export default function Content({ children }) {
                                                     className="border-b-0 p-3"
                                                 >
                                                     <ListItemPrefix>
-                                                        <UserGroupIcon
+                                                        <Cog6ToothIcon
                                                             className="h-5 w-5"
                                                             color="white"
                                                         />
@@ -1185,17 +1195,23 @@ export default function Content({ children }) {
                                                 </List>
                                             </AccordionBody>
                                         </Accordion>
-                                        <ListItem>
-                                            <ListItemPrefix>
-                                                <InboxIcon
-                                                    className="h-5 w-5"
-                                                    color="white"
-                                                />
-                                            </ListItemPrefix>
-                                            <Typography color="white">
-                                                Logout
-                                            </Typography>
-                                        </ListItem>
+                                        <Link
+                                            href={route("logout")}
+                                            as="button"
+                                            method="post"
+                                        >
+                                            <ListItem>
+                                                <ListItemPrefix>
+                                                    <PowerIcon
+                                                        className="h-5 w-5"
+                                                        color="white"
+                                                    />
+                                                </ListItemPrefix>
+                                                <Typography color="white">
+                                                    Logout
+                                                </Typography>
+                                            </ListItem>
+                                        </Link>
                                     </List>
                                 </div>
                                 <div className="w-full">

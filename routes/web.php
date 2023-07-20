@@ -27,7 +27,7 @@ use Inertia\Inertia;
 //     ],);
 // });
 
-Route::get('/', [CategoryController::class, 'show']);
+Route::get('/', [CategoryController::class, 'show'])->name("home");
 Route::get('/kategori/{id}', function () {
     return Inertia::render("Kategori");
 })->name("kategori.detail");
@@ -42,7 +42,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified']], functi
         return Inertia::render('pageAdmin/Dashboard');
     })->name('dashboard');
 
-    Route::get('user', [ProfileController::class, 'show'])->name('user');
+    Route::get('user', [ProfileController::class, 'show'])->name('admin.user');
     Route::post('/user', [ProfileController::class, 'store']);
     Route::post('/user/delete', [ProfileController::class, 'delete'])->name('delete.user');
 
@@ -57,7 +57,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified']], functi
 
 
     Route::post('/kategori', [CategoryController::class, 'store']);
-    Route::get('/kategori', [CategoryController::class, 'index'])->name('kategori');
+    Route::get('/kategori', [CategoryController::class, 'index'])->name('admin.kategori');
     Route::get('/kategori/edit ', [CategoryController::class, 'edit'])->name('edit.kategori');
     Route::post('/kategori/update', [CategoryController::class, 'update'])->name("update.kategori");
     Route::post('/kategori/delete', [CategoryController::class, 'destroy'])->name('delete.kategori');

@@ -6,7 +6,8 @@ export default function Footer({ user }) {
         <footer className="w-full">
             <div className="fixed bottom-0 left-0 z-50 w-full h-16 bg-primary ">
                 <div className="grid h-full max-w-lg grid-cols-4 mx-auto">
-                    <button
+                    <Link
+                        href={route("home")}
                         type="button"
                         className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50  group"
                     >
@@ -22,7 +23,7 @@ export default function Footer({ user }) {
                         <span className="text-sm text-white  group-hover:text-blue-600 ">
                             Home
                         </span>
-                    </button>
+                    </Link>
                     <Link
                         href={route("chat")}
                         className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 group"
