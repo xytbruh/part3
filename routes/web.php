@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -30,10 +31,7 @@ use Inertia\Inertia;
 Route::get('/', [CategoryController::class, 'show'])->name("home");
 Route::get('/kategori/{id}', function () {
     return Inertia::render("Kategori");
-})->name("kategori.detail");
-Route::get('/produk', function () {
-    return Inertia::render("Produk");
-})->name("produk");
+});
 
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified']], function () {
@@ -54,6 +52,21 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified']], functi
     // Route::get('produk/delete', [ProductController::class, 'destroy' ])->name("delete.produk"); 
     // Route::get('/product/bulk', [ProductController::class, 'massUploadForm'])->name('product.bulk'); 
     // Route::post('/product/bulk', [ProductController::class, 'massUpload'])->name('product.saveBulk');
+    Route::get('/banner-iklan', [BannerController::class, 'index'])->name('bannerIklan');
+    Route::post('/banner/update', [BannerController::class, 'update'])->name("update.banner");
+
+    Route::post('/banner-iklan/iklan-atas', [BannerController::class, 'iklanAtas']);
+    Route::post('/banner-iklan/iklan-tengah', [BannerController::class, 'iklanTengah']);
+    Route::post('/banner-iklan/iklan-bawah', [BannerController::class, 'iklanBawah']);
+    Route::post('/banner-iklan/delete', [BannerController::class, 'destroy'])->name('delete.banner');
+
+
+    Route::post('/produk', [ProductController::class, 'store']);
+    Route::get('/produk', [ProductController::class, 'index'])->name('produk');
+    Route::get('/produk/edit ', [ProductController::class, 'edit'])->name('edit.produk');
+    Route::post('/produk/update', [ProductController::class, 'update'])->name("update.produk");
+    Route::post('/produk/delete', [ProductController::class, 'destroy'])->name('delete.produk');
+
 
 
     Route::post('/kategori', [CategoryController::class, 'store']);
@@ -61,6 +74,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified']], functi
     Route::get('/kategori/edit ', [CategoryController::class, 'edit'])->name('edit.kategori');
     Route::post('/kategori/update', [CategoryController::class, 'update'])->name("update.kategori");
     Route::post('/kategori/delete', [CategoryController::class, 'destroy'])->name('delete.kategori');
+
+
+    Route::get('/pengaturan', function () {
+        return Inertia::render('pageAdmin/menuUtils/Pengaturan');
+    })->name('pengaturan');
 });
 
 // menu master

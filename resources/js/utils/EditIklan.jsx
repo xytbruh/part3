@@ -11,31 +11,28 @@ import {
 } from "@material-tailwind/react";
 import { router } from "@inertiajs/react";
 
-export default function EditKategori({ category }) {
+export default function EditIklan({ banner }) {
     const handleOpen = () => setOpen((cur) => !cur);
     const [open, setOpen] = useState(false);
-    const [name, setName] = useState(category.name);
     const [image, setImage] = useState(null);
 
-    const id = category.id;
+    const id = banner.id;
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         const data = {
             id,
-            name,
             image,
         };
-        router.post("/admin/kategori/update", data);
-        setName("");
+        router.post("/admin/banner/update", data);
         setImage(null);
         setOpen(false);
     };
     return (
         <div>
             <Button
-                className="font-medium bg-blue-500 px-2 mx-1 rounded-md text-black"
+                className="bg-blue-500 w-full p-2 rounded-md text-white"
                 onClick={handleOpen}
             >
                 Edit
@@ -53,26 +50,17 @@ export default function EditKategori({ category }) {
                         className="mb-4 grid h-28 place-items-center"
                     >
                         <Typography variant="h3" color="white">
-                            Edit Kategori
+                            Edit Iklan
                         </Typography>
                     </CardHeader>
                     <form onSubmit={handleSubmit}>
                         <CardBody className="flex flex-col gap-4">
-                            <Input
-                                label="kategori"
-                                type="text"
-                                onChange={(e) => {
-                                    setName(e.target.value);
-                                }}
-                                defaultValue={category.name}
-                                size="lg"
-                            />
                             <div>
                                 <label htmlFor="">Current Image:</label>
-                                {category.image && (
+                                {banner.image && (
                                     <img
-                                        src={`/storage/${category.image}`}
-                                        width="50"
+                                        src={`/storage/${banner.image}`}
+                                        className="w-full"
                                         alt=""
                                     />
                                 )}

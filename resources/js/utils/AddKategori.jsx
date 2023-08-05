@@ -8,22 +8,21 @@ import {
     CardFooter,
     Typography,
     Input,
-    
 } from "@material-tailwind/react";
 import { router } from "@inertiajs/react";
 
-export default function AddProduct({ product }) {
+export default function AddKategori() {
     const handleOpen = () => setOpen((cur) => !cur);
     const [open, setOpen] = useState(false);
     const [name, setName] = useState("");
-    const [parent, setParent] = useState("");
+    const [image, setImage] = useState(null);
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         const formData = new FormData();
         formData.append("name", name);
-        formData.append("parent", parent);
+        formData.append("image", image);
 
         router.post("/admin/kategori", formData);
         setOpen(false);
@@ -52,30 +51,22 @@ export default function AddProduct({ product }) {
                     <form onSubmit={handleSubmit}>
                         <CardBody className="flex flex-col gap-4">
                             <Input
-                                label="Nama Kategori"
+                                label="kategori"
                                 value={name}
+                                type="text"
                                 onChange={(e) => {
                                     setName(e.target.value);
                                 }}
                                 size="lg"
                             />
-                            <div className="flex w-72 flex-col gap-6">
-                                <select
-                                    value={parent}
-                                    onChange={(e) => {
-                                        setParent(e.target.value);
-                                    }}
-                                >
-                                    <option value="">None</option>
-                                    {/* {product.map((product, index) => (
-                                        <>
-                                            <option key={index}>
-                                                {product.name}
-                                            </option>
-                                        </>
-                                    ))} */}
-                                </select>
-                            </div>
+                            <Input
+                                label="Image"
+                                type="file"
+                                onChange={(e) => {
+                                    setImage(e.target.files[0]);
+                                }}
+                                size="lg"
+                            />
                         </CardBody>
                         <CardFooter className="pt-0">
                             <Button

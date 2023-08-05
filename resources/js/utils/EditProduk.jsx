@@ -8,16 +8,18 @@ import {
     CardFooter,
     Typography,
     Input,
+    Textarea,
 } from "@material-tailwind/react";
 import { router } from "@inertiajs/react";
 
-export default function EditKategori({ category }) {
+export default function EditProduk({ product }) {
     const handleOpen = () => setOpen((cur) => !cur);
     const [open, setOpen] = useState(false);
-    const [name, setName] = useState(category.name);
+    const [name, setName] = useState(product.name);
+    const [description, setDescription] = useState(product.description);
     const [image, setImage] = useState(null);
 
-    const id = category.id;
+    const id = product.id;
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -25,10 +27,12 @@ export default function EditKategori({ category }) {
         const data = {
             id,
             name,
+            description,
             image,
         };
-        router.post("/admin/kategori/update", data);
+        router.post("/admin/produk/update", data);
         setName("");
+        setDescription("");
         setImage(null);
         setOpen(false);
     };
@@ -64,14 +68,21 @@ export default function EditKategori({ category }) {
                                 onChange={(e) => {
                                     setName(e.target.value);
                                 }}
-                                defaultValue={category.name}
+                                defaultValue={product.name}
                                 size="lg"
+                            />
+                            <Textarea
+                                type="text"
+                                defaultValue={product.description}
+                                onChange={(e) => {
+                                    setDescription(e.target.value);
+                                }}
                             />
                             <div>
                                 <label htmlFor="">Current Image:</label>
-                                {category.image && (
+                                {product.image && (
                                     <img
-                                        src={`/storage/${category.image}`}
+                                        src={`/storage/${product.image}`}
                                         width="50"
                                         alt=""
                                     />

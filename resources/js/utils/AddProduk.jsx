@@ -11,20 +11,25 @@ import {
 } from "@material-tailwind/react";
 import { router } from "@inertiajs/react";
 
-export default function AddCategory() {
+export default function AddProduk() {
     const handleOpen = () => setOpen((cur) => !cur);
     const [open, setOpen] = useState(false);
     const [name, setName] = useState("");
     const [image, setImage] = useState(null);
+    const [description, setDescription] = useState("");
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         const formData = new FormData();
         formData.append("name", name);
+        formData.append("description", description);
         formData.append("image", image);
 
-        router.post("/admin/kategori", formData);
+        router.post("/admin/produk", formData);
+        setName("");
+        setDescription("");
+        setImage(null);
         setOpen(false);
     };
     return (
@@ -45,22 +50,31 @@ export default function AddCategory() {
                         className="mb-4 grid h-28 place-items-center"
                     >
                         <Typography variant="h3" color="white">
-                            Tambah Kategori
+                            Tambah Produk
                         </Typography>
                     </CardHeader>
                     <form onSubmit={handleSubmit}>
                         <CardBody className="flex flex-col gap-4">
                             <Input
-                                label="kategori"
-                                value={name}
+                                label="Nama Produk"
                                 type="text"
+                                value={name}
                                 onChange={(e) => {
                                     setName(e.target.value);
                                 }}
                                 size="lg"
                             />
                             <Input
-                                label="Image"
+                                label="Deskripsi Produk"
+                                type="text"
+                                value={description}
+                                onChange={(e) => {
+                                    setDescription(e.target.value);
+                                }}
+                                size="lg"
+                            />
+                            <Input
+                                label="Gambar"
                                 type="file"
                                 onChange={(e) => {
                                     setImage(e.target.files[0]);

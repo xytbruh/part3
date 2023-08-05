@@ -1,12 +1,13 @@
-import AddProduct from "@/utils/AddProduct";
 import { Link } from "@inertiajs/react";
 import { Card } from "@material-tailwind/react";
 import React from "react";
-import Content from "../../Layouts/Content";
+import Content from "../Layouts/Content";
+import AddProduk from "@/utils/AddProduk";
+import EditProduk from "@/utils/EditProduk";
 
-export default function Produk(props) {
-    console.log(props)
-    const TABLE_HEAD_PRODUCT = ["No", "Kategori", "Parent", "Created At"];
+export default function Produk({ product }) {
+    console.log(product);
+    const TABLE_HEAD_PRODUCT = ["No", "Nama", "Image", "Description", "Slug"];
     return (
         <Card className="overflow-scroll h-full w-full">
             <table className="w-full min-w-max table-auto text-left">
@@ -32,13 +33,13 @@ export default function Produk(props) {
                                 color="blue-gray"
                                 className="font-normal leading-none opacity-70"
                             >
-                                <AddProduct />
+                                <AddProduk />
                             </div>
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    {/* {product.map((product, index) => {
+                    {product.map((product, index) => {
                         const isLast = index === product.length - 1;
                         const classes = isLast
                             ? "p-4"
@@ -70,7 +71,11 @@ export default function Produk(props) {
                                         color="blue-gray"
                                         className="font-normal text-sm"
                                     >
-                                        {product.parent}
+                                        <img
+                                            src={`/storage/${product.image}`}
+                                            width="50"
+                                            alt=""
+                                        />{" "}
                                     </div>
                                 </td>
 
@@ -80,19 +85,26 @@ export default function Produk(props) {
                                         color="blue-gray"
                                         className="font-normal text-sm"
                                     >
-                                        {product.created_at}
+                                        {product.description}
+                                    </div>
+                                </td>
+                                <td className={classes}>
+                                    <div
+                                        variant="small"
+                                        color="blue-gray"
+                                        className="font-normal text-sm"
+                                    >
+                                        {product.slug}
                                     </div>
                                 </td>
 
-                                <td className={classes}>
+                                <td
+                                    className={classes}
+                                    style={{ display: "flex" }}
+                                >
+                                    <EditProduk product={product} />
                                     <Link
-                                        href={route("edit.kategori", product.id)}
-                                        as="button"
-                                    >
-                                        Edit
-                                    </Link>
-                                    <Link
-                                        href={route("delete.kategori")}
+                                        href={route("delete.produk")}
                                         method="post"
                                         data={{
                                             id: product.id,
@@ -106,10 +118,10 @@ export default function Produk(props) {
                                 </td>
                             </tr>
                         );
-                    })} */}
+                    })}
                 </tbody>
             </table>
         </Card>
     );
 }
-Product.layout = (page) => <Content children={page} />;
+Produk.layout = (page) => <Content children={page} />;

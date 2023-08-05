@@ -14,7 +14,6 @@ import {
 import {
     PresentationChartBarIcon,
     UserCircleIcon,
-    InboxIcon,
     UserGroupIcon,
     ClipboardDocumentListIcon,
     ShoppingCartIcon,
@@ -24,7 +23,8 @@ import {
 } from "@heroicons/react/24/solid";
 import { ChevronRightIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
 
-export default function Content({ children }) {
+export default function Content(props) {
+    console.log(props);
     const [open, setOpen] = useState(0);
 
     const handleOpen = (value) => {
@@ -205,18 +205,20 @@ export default function Content({ children }) {
                                                 Sosial Media
                                             </Typography>
                                         </ListItem>
-                                        <ListItem>
-                                            <ListItemPrefix>
-                                                <ChevronRightIcon
-                                                    strokeWidth={3}
-                                                    className="h-3 w-5"
-                                                    color="white"
-                                                />
-                                            </ListItemPrefix>
-                                            <Typography color="white">
-                                                Banner Iklan
-                                            </Typography>
-                                        </ListItem>
+                                        <Link href={route('bannerIklan')}>
+                                            <ListItem>
+                                                <ListItemPrefix>
+                                                    <ChevronRightIcon
+                                                        strokeWidth={3}
+                                                        className="h-3 w-5"
+                                                        color="white"
+                                                    />
+                                                </ListItemPrefix>
+                                                <Typography color="white">
+                                                    Banner Iklan
+                                                </Typography>
+                                            </ListItem>
+                                        </Link>
                                     </List>
                                 </AccordionBody>
                             </Accordion>
@@ -497,18 +499,20 @@ export default function Content({ children }) {
                                 </ListItem>
                                 <AccordionBody className="py-1">
                                     <List className="p-0">
-                                        <ListItem>
-                                            <ListItemPrefix>
-                                                <ChevronRightIcon
-                                                    strokeWidth={3}
-                                                    className="h-3 w-5"
-                                                    color="white"
-                                                />
-                                            </ListItemPrefix>
-                                            <Typography color="white">
-                                                Pengaturan
-                                            </Typography>
-                                        </ListItem>
+                                        <Link href={route("pengaturan")}>
+                                            <ListItem>
+                                                <ListItemPrefix>
+                                                    <ChevronRightIcon
+                                                        strokeWidth={3}
+                                                        className="h-3 w-5"
+                                                        color="white"
+                                                    />
+                                                </ListItemPrefix>
+                                                <Typography color="white">
+                                                    Pengaturan
+                                                </Typography>
+                                            </ListItem>
+                                        </Link>
                                         <ListItem>
                                             <ListItemPrefix>
                                                 <ChevronRightIcon
@@ -1144,18 +1148,26 @@ export default function Content({ children }) {
                                             </ListItem>
                                             <AccordionBody className="py-1">
                                                 <List className="p-0">
-                                                    <ListItem>
-                                                        <ListItemPrefix>
-                                                            <ChevronRightIcon
-                                                                strokeWidth={3}
-                                                                className="h-3 w-5"
-                                                                color="white"
-                                                            />
-                                                        </ListItemPrefix>
-                                                        <Typography color="white">
-                                                            Pengaturan
-                                                        </Typography>
-                                                    </ListItem>
+                                                    <Link
+                                                        href={route(
+                                                            "pengaturan"
+                                                        )}
+                                                    >
+                                                        <ListItem>
+                                                            <ListItemPrefix>
+                                                                <ChevronRightIcon
+                                                                    strokeWidth={
+                                                                        3
+                                                                    }
+                                                                    className="h-3 w-5"
+                                                                    color="white"
+                                                                />
+                                                            </ListItemPrefix>
+                                                            <Typography color="white">
+                                                                Pengaturan
+                                                            </Typography>
+                                                        </ListItem>
+                                                    </Link>
                                                     <ListItem>
                                                         <ListItemPrefix>
                                                             <ChevronRightIcon
@@ -1262,9 +1274,7 @@ export default function Content({ children }) {
                                                     src="https://tuk-cdn.s3.amazonaws.com/assets/components/boxed_layout/bl_1.png"
                                                     className="w-8 h-8 rounded-md"
                                                 />
-                                                <p className="md:text-xl text-white text-base leading-4 ml-2">
-                                                    dimas
-                                                </p>
+                                                <p className="md:text-xl text-white text-base leading-4 ml-2"></p>
                                             </div>
                                             <ul className="flex">
                                                 <li className="cursor-pointer  pt-5 pb-3">
@@ -1493,7 +1503,10 @@ export default function Content({ children }) {
                                                 </div>
                                             </div>
                                             <p className="text-white text-sm mx-3">
-                                                dimas
+                                                {props.children.props
+                                                    ? props.children.props.auth
+                                                          .user.name
+                                                    : ""}
                                             </p>
                                             <div className="cursor-pointer text-white">
                                                 <svg
@@ -1551,7 +1564,7 @@ export default function Content({ children }) {
                         {/* Navigation ends */}
                         {/* Remove class [ h-64 ] when adding a card block */}
                         <div className="container mx-auto py-10 md:w-4/5 w-11/12 px-6">
-                            {children}
+                            {props.children}
                         </div>
                     </div>
                 </div>

@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
-
 use Inertia\Inertia;
+use App\Models\Category;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -20,7 +21,6 @@ class CategoryController extends Controller
     {
         $category = Category::orderBy('created_at', 'desc')->get();
         return Inertia::render('pageAdmin/menuMarketPlace/Kategori', ['category' => $category]);
-        
     }
 
     /**
@@ -31,7 +31,6 @@ class CategoryController extends Controller
     public function create()
     {
         return Inertia::render('pageAdmin/menuMarketPlace/Kategori');
-
     }
 
     /**
@@ -51,13 +50,13 @@ class CategoryController extends Controller
 
         Storage::disk('local')->put('public/' . $path, file_get_contents($file));
         Category::create([
-                'name' => $request->name,
-                'image' => $path,
-                'slug' => Str::slug($request->name, '-'),
-            ]); 
+            'name' => $request->name,
+            'image' => $path,
+            'slug' => Str::slug($request->name, '-'),
+        ]);
         return redirect()->back()->with('message', 'kategori berhasil dibuat');
     }
-
+   
     /**
      * Display the specified resource.
      *
@@ -76,7 +75,7 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Category $category, Request $request)
-    {   
+    {
     }
 
     /**
@@ -86,19 +85,55 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request)
     {
-        $file = $request->file('image');
-        $path = time() . '_' . $request->name . '.' . $file->getClientOriginalExtension();
-        
-        Storage::disk('local')->put('public/' . $path, file_get_contents($file));
-        $category->where($request->id)->update([
-            'name' => $request->name,
-            'image' => $path,
-            'slug' => Str::slug($request->name, '-')
-        ]);
-        
-    return to_route('kategori')->with("message", "kategori berhasil diubah");
+        // dd($request->hasFile('image'));
+        // $file = $request->file('image');
+        // $path = time() . '_' . $request->name . '.' . $file->getClientOriginalExtension();
+
+        // Storage::disk('local')->put('public/' . $path, file_get_contents($file));
+        // $category->update([
+        //     'name' => $request->name,
+        //     'image' => $path,
+        //     'slug' => Str::slug($request->name, '-')
+        // ]);
+
+        // $this->validate($request, [
+        //     'name'  => 'required|string|max:50|unique:categories',
+        //     'image' => 'image|mimes:jpeg,png,jpg,gif,svg',
+        // ]);
+
+        //check if image is uploaded
+        if ($request->hasFile('image')) {
+
+            //upload new image
+            $image = $request->file('image');
+            $filename = time() . '_' . $request->name . '.' . $image->getClientOriginalExtension();
+            Storage::disk('local')->put('public/' . $filename, file_get_contents($image));
+
+            // delete old image
+            // Storage::delete('public/posts/' . $category->image);
+
+            //update with new image
+            DB::table('categories')
+                ->where('id', $request->id)
+                ->update([
+                    'name' => $request->name,
+                    'image' => $filename,
+                    'slug' => Str::slug($request->name, '-')
+                ]);
+        } else {
+
+            //update without image
+            DB::table('categories')
+                ->where('id', $request->id)
+                ->update([
+                    'name' => $request->name,
+                    'slug' => Str::slug($request->name, '-')
+                ]);
+        }
+
+        return redirect()->back()->with('message', 'kategori berhasil diupdate');
     }
 
     /**
@@ -111,6 +146,7 @@ class CategoryController extends Controller
     {
         $category = Category::find($request->id);
         $category->delete();
-        return redirect()->back()->with('message','kategori berhasil dihapus');
+        Storage::delete('public/' . $category->image);
+        return redirect()->back()->with('message', 'kategori berhasil dihapus');
     }
 }

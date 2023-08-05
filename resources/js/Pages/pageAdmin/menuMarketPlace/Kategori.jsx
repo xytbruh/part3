@@ -1,4 +1,4 @@
-import AddCategory from "@/utils/AddCategory";
+import AddKategori from "@/utils/AddKategori";
 import { Link } from "@inertiajs/react";
 import { Card } from "@material-tailwind/react";
 import React from "react";
@@ -33,7 +33,7 @@ export default function Kategori({ category }) {
                                 color="blue-gray"
                                 className="font-normal leading-none opacity-70"
                             >
-                                <AddCategory category={category} />
+                                <AddKategori category={category} />
                             </div>
                         </th>
                     </tr>
