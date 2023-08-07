@@ -6,9 +6,9 @@ import {
     TabPanel,
 } from "@material-tailwind/react";
 import Content from "../Layouts/Content";
-import IklanAtas from "@/utils/IklanAtas";
-import IklanTengah from "@/utils/IklanTengah";
-import IklanBawah from "@/utils/IklanBawah";
+import IklanAtas from "../components/IklanAtas";
+import IklanBawah from "../components/IklanBawah";
+import IklanTengah from "../components/IklanTengah";
 
 export default function BannerIklan({ banner }) {
     console.log(banner);

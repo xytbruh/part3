@@ -205,7 +205,7 @@ export default function Content(props) {
                                                 Sosial Media
                                             </Typography>
                                         </ListItem>
-                                        <Link href={route('bannerIklan')}>
+                                        <Link href={route("bannerIklan")}>
                                             <ListItem>
                                                 <ListItemPrefix>
                                                     <ChevronRightIcon
@@ -537,18 +537,20 @@ export default function Content(props) {
                                                 Integrasi
                                             </Typography>
                                         </ListItem>
-                                        <ListItem>
-                                            <ListItemPrefix>
-                                                <ChevronRightIcon
-                                                    strokeWidth={3}
-                                                    className="h-3 w-5"
-                                                    color="white"
-                                                />
-                                            </ListItemPrefix>
-                                            <Typography color="white">
-                                                Dompet
-                                            </Typography>
-                                        </ListItem>
+                                        <Link href={route("dompet")}>
+                                            <ListItem>
+                                                <ListItemPrefix>
+                                                    <ChevronRightIcon
+                                                        strokeWidth={3}
+                                                        className="h-3 w-5"
+                                                        color="white"
+                                                    />
+                                                </ListItemPrefix>
+                                                <Typography color="white">
+                                                    Dompet
+                                                </Typography>
+                                            </ListItem>
+                                        </Link>
                                     </List>
                                 </AccordionBody>
                             </Accordion>

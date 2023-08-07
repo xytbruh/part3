@@ -4,6 +4,8 @@ use App\Http\Controllers\BannerController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SettingController;
+use App\Http\Controllers\WalletController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -76,9 +78,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified']], functi
     Route::post('/kategori/delete', [CategoryController::class, 'destroy'])->name('delete.kategori');
 
 
-    Route::get('/pengaturan', function () {
-        return Inertia::render('pageAdmin/menuUtils/Pengaturan');
-    })->name('pengaturan');
+    Route::get('/pengaturan', [SettingController::class, 'index'])->name('pengaturan');
+    Route::post('/pengaturan/update', [SettingController::class, 'update']);
+
+    Route::get('/dompet', [WalletController::class, 'index'])->name('dompet');
+    Route::post('/dompet', [WalletController::class, 'store']);
+    Route::post('/dompet/update', [WalletController::class, 'update']);
+    Route::post('/dompet/delete', [WalletController::class, 'destroy'])->name('delete.dompet');
 });
 
 // menu master

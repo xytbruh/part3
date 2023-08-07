@@ -1,19 +1,20 @@
-import { Link } from "@inertiajs/react";
-import { Card } from "@material-tailwind/react";
 import React from "react";
 import Content from "../Layouts/Content";
-import AddProduk from "@/utils/AddProduk";
-import EditProduk from "../components/EditProduk";
+import { Card } from "@material-tailwind/react";
+import { Link } from "@inertiajs/react";
+import AddDompet from "../components/AddDompet";
+import EditDompet from "../components/EditDompet";
 
-export default function Produk({ product }) {
-    console.log(product);
-    const TABLE_HEAD_PRODUCT = ["No", "Nama", "Image", "Description", "Slug"];
+export default function Dompet({ wallet }) {
+    console.log(wallet);
+    const TABLE_HEAD = ["No", "Nama", "Bank", "No Rekening"];
+
     return (
         <Card className="overflow-scroll h-full w-full">
             <table className="w-full min-w-max table-auto text-left">
                 <thead>
                     <tr>
-                        {TABLE_HEAD_PRODUCT.map((head) => (
+                        {TABLE_HEAD.map((head) => (
                             <th
                                 key={head}
                                 className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
@@ -33,14 +34,14 @@ export default function Produk({ product }) {
                                 color="blue-gray"
                                 className="font-normal leading-none opacity-70"
                             >
-                                <AddProduk />
+                                <AddDompet />
                             </div>
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    {product.map((product, index) => {
-                        const isLast = index === product.length - 1;
+                    {wallet.map((wallet, index) => {
+                        const isLast = index === wallet.length - 1;
                         const classes = isLast
                             ? "p-4"
                             : "p-4 border-b border-blue-gray-50";
@@ -56,28 +57,6 @@ export default function Produk({ product }) {
                                         {index + 1}
                                     </div>
                                 </td>
-                                <td className={classes}>
-                                    <div
-                                        variant="small"
-                                        color="blue-gray"
-                                        className="font-normal text-sm"
-                                    >
-                                        {product.name}
-                                    </div>
-                                </td>
-                                <td className={classes}>
-                                    <div
-                                        variant="small"
-                                        color="blue-gray"
-                                        className="font-normal text-sm"
-                                    >
-                                        <img
-                                            src={`/storage/${product.image}`}
-                                            width="50"
-                                            alt=""
-                                        />{" "}
-                                    </div>
-                                </td>
 
                                 <td className={classes}>
                                     <div
@@ -85,7 +64,7 @@ export default function Produk({ product }) {
                                         color="blue-gray"
                                         className="font-normal text-sm"
                                     >
-                                        {product.description}
+                                        {wallet.name}
                                     </div>
                                 </td>
                                 <td className={classes}>
@@ -94,7 +73,16 @@ export default function Produk({ product }) {
                                         color="blue-gray"
                                         className="font-normal text-sm"
                                     >
-                                        {product.slug}
+                                        {wallet.bank}
+                                    </div>
+                                </td>
+                                <td className={classes}>
+                                    <div
+                                        variant="small"
+                                        color="blue-gray"
+                                        className="font-normal text-sm"
+                                    >
+                                        {wallet.norek}
                                     </div>
                                 </td>
 
@@ -102,12 +90,12 @@ export default function Produk({ product }) {
                                     className={classes}
                                     style={{ display: "flex" }}
                                 >
-                                    <EditProduk product={product} />
+                                    <EditDompet wallet={wallet} />
                                     <Link
-                                        href={route("delete.produk")}
+                                        href={route("delete.dompet")}
                                         method="post"
                                         data={{
-                                            id: product.id,
+                                            id: wallet.id,
                                         }}
                                         as="button"
                                         variant="small"
@@ -124,4 +112,4 @@ export default function Produk({ product }) {
         </Card>
     );
 }
-Produk.layout = (page) => <Content children={page} />;
+Dompet.layout = (page) => <Content children={page} />;

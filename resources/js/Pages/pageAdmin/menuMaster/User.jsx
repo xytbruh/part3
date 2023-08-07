@@ -3,7 +3,6 @@ import Content from "../Layouts/Content";
 import { Card } from "@material-tailwind/react";
 import EditUser from "@/utils/EditUser";
 import { Link } from "@inertiajs/react";
-import AddUser from "@/utils/AddUser";
 
 export default function User({ user }) {
     console.log(user);

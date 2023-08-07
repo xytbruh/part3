@@ -1,9 +1,9 @@
-import AddKategori from "@/utils/AddKategori";
+import AddKategori from "@/Pages/pageAdmin/components/AddKategori";
 import { Link } from "@inertiajs/react";
 import { Card } from "@material-tailwind/react";
 import React from "react";
 import Content from "../Layouts/Content";
-import EditKategori from "@/utils/EditKategori";
+import EditKategori from "../components/EditKategori";
 
 export default function Kategori({ category }) {
     console.log(category);

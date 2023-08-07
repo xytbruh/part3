@@ -1,63 +1,110 @@
-import React from "react";
-import {
-    Tabs,
-    TabsHeader,
-    TabsBody,
-    Tab,
-    TabPanel,
-} from "@material-tailwind/react";
+import React, { useState } from "react";
 
-import { FaList, FaTools, FaUserCircle } from "react-icons/fa";
 import Content from "../Layouts/Content";
+import { Button, Input, Textarea } from "@material-tailwind/react";
+import InputLabel from "@/Components/InputLabel";
+import { router } from "@inertiajs/react";
 
-export default function Pengaturan() {
-    const data = [
-        {
-            label: "Dashboard",
-            value: "dashboard",
-            icon: <FaList />,
-            desc: `It really matters and then like it really doesn't matter.
-      What matters is the people who are sparked by it. And the people
-      who are like offended by it, it doesn't matter.`,
-        },
-        {
-            label: "Profile",
-            value: "profile",
-            icon: <FaUserCircle />,
-            desc: `Because it's about motivating the doers. Because I'm here
-      to follow my dreams and inspire other people to follow their dreams, too.`,
-        },
-        {
-            label: "Settings",
-            value: "settings",
-            icon: <FaTools />,
-            desc: `We're not always in the position that we want to be at.
-      We're constantly growing. We're constantly making mistakes. We're
-      constantly trying to express ourselves and actualize our dreams.`,
-        },
-    ];
+export default function Pengaturan({ setting }) {
+    console.log(setting);
+    const [title, setTitle] = useState(setting.title);
+    const [email, setEmail] = useState(setting.email);
+    const [phone, setPhone] = useState(setting.phone);
+    const [keywords, setKeywords] = useState(setting.keywords);
+    const [description, setDescription] = useState(setting.description);
+    const [logo, setLogo] = useState(null);
+
+    const id = setting.id;
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        const data = {
+            id,
+            title,
+            email,
+            phone,
+            keywords,
+            description,
+            logo,
+        };
+
+        router.post("/admin/pengaturan/update", data);
+    };
     return (
-        <>
-            <Tabs value="dashboard">
-                <TabsHeader>
-                    {data.map(({ label, value, icon }) => (
-                        <Tab key={value} value={value}>
-                            <div className="flex items-center gap-2">
-                                {icon}
-                                {label}
-                            </div>
-                        </Tab>
-                    ))}
-                </TabsHeader>
-                <TabsBody>
-                    {data.map(({ value, desc }) => (
-                        <TabPanel key={value} value={value}>
-                            {desc}
-                        </TabPanel>
-                    ))}
-                </TabsBody>
-            </Tabs>
-        </>
+        <form action="" onSubmit={handleSubmit}>
+            <div className="grid grid-cols-2 gap-3">
+                <div>
+                    <InputLabel value="Title" />
+                    <Input
+                        size="lg"
+                        type="text"
+                        color="white"
+                        defaultValue={setting.title}
+                        onChange={(e) => setTitle(e.target.value)}
+                    />
+                </div>
+                <div>
+                    <InputLabel value="Email" />
+                    <Input
+                        size="lg"
+                        type="email"
+                        color="white"
+                        defaultValue={setting.email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                </div>
+                <div>
+                    <InputLabel value="No Telp" />
+                    <Input
+                        size="lg"
+                        type="number"
+                        color="white"
+                        defaultValue={setting.phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                    />
+                </div>
+                <div>
+                    <InputLabel value="Meta Keywords" />
+                    <Input
+                        size="lg"
+                        color="white"
+                        defaultValue={setting.keywords}
+                        onChange={(e) => setKeywords(e.target.value)}
+                    />
+                </div>
+                <div className="col-span-2">
+                    <InputLabel value="Meta Deskripsi" />
+                    <Textarea
+                        size="lg"
+                        type="text"
+                        className="text-white border-t-white border-white focus:border-white focus:border-t-white"
+                        defaultValue={setting.description}
+                        onChange={(e) => setDescription(e.target.value)}
+                    />
+                </div>
+                <div>
+                    <InputLabel value="Logo" />
+                    <Input
+                        size="lg"
+                        color="white"
+                        type="file"
+                        onChange={(e) => setLogo(e.target.files[0])}
+                    />
+                </div>
+                <div>
+                    <InputLabel value="Simpan" />
+                    <Button
+                        type="submit"
+                        color="green"
+                        className="w-full"
+                        size="md"
+                    >
+                        Simpan
+                    </Button>
+                </div>
+            </div>
+        </form>
     );
 }
 Pengaturan.layout = (page) => <Content children={page} />;
