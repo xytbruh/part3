@@ -44,8 +44,9 @@ class SettingController extends Controller
             'title' => 'required|string|max:50|unique:settings',
             'email' => 'required',
             'phone' => 'required',
-            'keywords' => 'required',
+            'alamat' => 'required',
             'description' => 'required',
+            'sosmed' => 'required',
             'logo' => 'required',
         ]);
         $file = $request->file('image');
@@ -56,8 +57,9 @@ class SettingController extends Controller
             'title' => $request->title,
             'email' => $request->email,
             'phone' => $request->phone,
-            'keywords' => $request->keywords,
+            'alamat' => $request->alamat,
             'description' => $request->description,
+            'sosmed' => $request->sosmed,
             'logo' => $path,
         ]);
         return redirect()->back()->with('message', 'kategori berhasil dibuat');
@@ -111,8 +113,9 @@ class SettingController extends Controller
                     'title' => $request->title,
                     'email' => $request->email,
                     'phone' => $request->phone,
-                    'keywords' => $request->keywords,
+                    'alamat' => $request->alamat,
                     'description' => $request->description,
+                    'sosmed' => $request->sosmed,
                     'logo' => $filename,
                 ]);
         } else {
@@ -124,8 +127,9 @@ class SettingController extends Controller
                     'title' => $request->title,
                     'email' => $request->email,
                     'phone' => $request->phone,
-                    'keywords' => $request->keywords,
+                    'alamat' => $request->alamat,
                     'description' => $request->description,
+                    'sosmed' => $request->sosmed,
                 ]);
         }
 

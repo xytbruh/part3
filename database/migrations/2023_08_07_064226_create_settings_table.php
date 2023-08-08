@@ -18,8 +18,9 @@ return new class extends Migration
             $table->string('title');
             $table->string('email');
             $table->string('phone');
-            $table->string('keywords');
+            $table->text('alamat');
             $table->string('description');
+            $table->string('sosmed');
             $table->string('logo');
             $table->timestamps();
         });

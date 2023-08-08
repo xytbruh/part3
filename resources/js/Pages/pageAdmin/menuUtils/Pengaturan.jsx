@@ -10,8 +10,9 @@ export default function Pengaturan({ setting }) {
     const [title, setTitle] = useState(setting.title);
     const [email, setEmail] = useState(setting.email);
     const [phone, setPhone] = useState(setting.phone);
-    const [keywords, setKeywords] = useState(setting.keywords);
+    const [alamat, setAlamat] = useState(setting.alamat);
     const [description, setDescription] = useState(setting.description);
+    const [sosmed, setSosmed] = useState(setting.sosmed);
     const [logo, setLogo] = useState(null);
 
     const id = setting.id;
@@ -24,8 +25,9 @@ export default function Pengaturan({ setting }) {
             title,
             email,
             phone,
-            keywords,
+            alamat,
             description,
+            sosmed,
             logo,
         };
 
@@ -34,7 +36,7 @@ export default function Pengaturan({ setting }) {
     return (
         <form action="" onSubmit={handleSubmit}>
             <div className="grid grid-cols-2 gap-3">
-                <div>
+                <div className="lg:col-span-1 col-span-2">
                     <InputLabel value="Title" />
                     <Input
                         size="lg"
@@ -44,7 +46,7 @@ export default function Pengaturan({ setting }) {
                         onChange={(e) => setTitle(e.target.value)}
                     />
                 </div>
-                <div>
+                <div className="lg:col-span-1 col-span-2">
                     <InputLabel value="Email" />
                     <Input
                         size="lg"
@@ -54,7 +56,7 @@ export default function Pengaturan({ setting }) {
                         onChange={(e) => setEmail(e.target.value)}
                     />
                 </div>
-                <div>
+                <div className="lg:col-span-1 col-span-2">
                     <InputLabel value="No Telp" />
                     <Input
                         size="lg"
@@ -64,17 +66,26 @@ export default function Pengaturan({ setting }) {
                         onChange={(e) => setPhone(e.target.value)}
                     />
                 </div>
-                <div>
-                    <InputLabel value="Meta Keywords" />
+                <div className="lg:col-span-1 col-span-2">
+                    <InputLabel value="Alamat" />
                     <Input
                         size="lg"
                         color="white"
-                        defaultValue={setting.keywords}
-                        onChange={(e) => setKeywords(e.target.value)}
+                        defaultValue={setting.alamat}
+                        onChange={(e) => setAlamat(e.target.value)}
                     />
                 </div>
                 <div className="col-span-2">
-                    <InputLabel value="Meta Deskripsi" />
+                    <InputLabel value="Sosial Media" />
+                    <Input
+                        size="lg"
+                        color="white"
+                        defaultValue={setting.sosmed}
+                        onChange={(e) => setSosmed(e.target.value)}
+                    />
+                </div>
+                <div className="col-span-2">
+                    <InputLabel value="Deskripsi" />
                     <Textarea
                         size="lg"
                         type="text"
@@ -83,7 +94,7 @@ export default function Pengaturan({ setting }) {
                         onChange={(e) => setDescription(e.target.value)}
                     />
                 </div>
-                <div>
+                <div className="lg:col-span-1 col-span-2">
                     <InputLabel value="Logo" />
                     <Input
                         size="lg"
@@ -92,7 +103,7 @@ export default function Pengaturan({ setting }) {
                         onChange={(e) => setLogo(e.target.files[0])}
                     />
                 </div>
-                <div>
+                <div className="lg:col-span-1 col-span-2">
                     <InputLabel value="Simpan" />
                     <Button
                         type="submit"

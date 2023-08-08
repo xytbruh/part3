@@ -13,8 +13,9 @@ class Setting extends Model
         'title',
         'email',
         'no_telp',
-        'keywords',
+        'alamat',
         'description',
+        'sosmed',
         'logo',
     ];
 }

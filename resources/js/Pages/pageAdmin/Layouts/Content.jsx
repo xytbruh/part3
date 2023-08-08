@@ -169,42 +169,6 @@ export default function Content(props) {
                                 </ListItem>
                                 <AccordionBody className="py-1">
                                     <List className="p-0">
-                                        <ListItem>
-                                            <ListItemPrefix>
-                                                <ChevronRightIcon
-                                                    strokeWidth={3}
-                                                    className="h-3 w-5"
-                                                    color="white"
-                                                />
-                                            </ListItemPrefix>
-                                            <Typography color="white">
-                                                Logo
-                                            </Typography>
-                                        </ListItem>
-                                        <ListItem>
-                                            <ListItemPrefix>
-                                                <ChevronRightIcon
-                                                    strokeWidth={3}
-                                                    className="h-3 w-5"
-                                                    color="white"
-                                                />
-                                            </ListItemPrefix>
-                                            <Typography color="white">
-                                                Alamat
-                                            </Typography>
-                                        </ListItem>
-                                        <ListItem>
-                                            <ListItemPrefix>
-                                                <ChevronRightIcon
-                                                    strokeWidth={3}
-                                                    className="h-3 w-5"
-                                                    color="white"
-                                                />
-                                            </ListItemPrefix>
-                                            <Typography color="white">
-                                                Sosial Media
-                                            </Typography>
-                                        </ListItem>
                                         <Link href={route("bannerIklan")}>
                                             <ListItem>
                                                 <ListItemPrefix>
