@@ -2,8 +2,8 @@ import { Head, Link } from "@inertiajs/react";
 import { Card } from "@material-tailwind/react";
 import React from "react";
 import Content from "../Layouts/Content";
-import AddProduk from "@/utils/AddProduk";
 import EditProduk from "../components/EditProduk";
+import AddProduk from "../components/AddProduk";
 
 export default function Produk({ product }) {
     const TABLE_HEAD_PRODUCT = ["No", "Nama", "Image", "Description", "Slug"];
